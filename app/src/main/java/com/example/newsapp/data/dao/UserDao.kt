@@ -8,7 +8,7 @@ import com.example.newsapp.data.entity.User
 @Dao
 interface UserDao {
 
-    @Query("select * from userInfo")
+    @Query("select * from userInfo where uid=1")
     fun getUser(): User
 
     @Insert
