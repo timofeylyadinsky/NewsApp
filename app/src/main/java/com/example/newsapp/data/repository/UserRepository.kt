@@ -15,4 +15,10 @@ fun saveUser(user: User, context: Context) {
     userDao.saveUser(user)
 }
 
-
+fun getUserInfo(context: Context): User {
+    val db = Room
+        .databaseBuilder(context, UserDB::class.java, "userInfo")
+        .build()
+    val userDao = db.userDao()
+    return userDao.getUser();
+}
