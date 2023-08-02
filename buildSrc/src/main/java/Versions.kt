@@ -4,4 +4,5 @@ object Versions {
     const val lifecycle = "2.6.1"
     const val activity = "1.7.2"
     const val junit = "4.13.2"
+    const val bom = "2023.03.00"
 }

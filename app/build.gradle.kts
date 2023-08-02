@@ -55,11 +55,11 @@ dependencies {
     implementation(Deps.coreKtx)
     implementation(Deps.lifecycleRuntime)
     implementation(Deps.activityCompose)
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
+    implementation(platform(Deps.composeBom))
+    implementation(Deps.composeUI)
+    implementation(Deps.composeGraphic)
+    implementation(Deps.composePreview)
+    implementation(Deps.material3)
 
     //Room
     implementation(Deps.room)

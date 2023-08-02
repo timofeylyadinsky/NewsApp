@@ -9,4 +9,10 @@ object Deps {
 
     val activityCompose by lazy {"androidx.activity:activity-compose:${Versions.activity}"}
     val junit by lazy {"junit:junit:${Versions.junit}"}
+
+    val composeUI by lazy {  "androidx.compose.ui:ui" }
+    val composeGraphic by lazy {"androidx.compose.ui:ui-graphics"}
+    val composePreview by lazy {"androidx.compose.ui:ui-tooling-preview"}
+    val material3 by lazy {"androidx.compose.material3:material3"}
+    val composeBom by lazy {"androidx.compose:compose-bom:${Versions.bom}"}
 }
