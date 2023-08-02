@@ -74,8 +74,9 @@ dependencies {
     testImplementation(Deps.junit)
     androidTestImplementation(Deps.espressoCore)
     androidTestImplementation(platform(Deps.composeBom))
+    androidTestImplementation(Deps.junitExt)
 
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")

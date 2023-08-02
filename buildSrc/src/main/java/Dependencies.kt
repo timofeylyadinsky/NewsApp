@@ -20,4 +20,6 @@ object Deps {
     val hiltCompiler by lazy { "com.google.dagger:hilt-android-compiler:${Versions.hilt}"}
 
     val espressoCore by lazy {"androidx.test.espresso:espresso-core:${Versions.espresso}"}
+
+    val junitExt by lazy { "androidx.test.ext:junit:${Versions.junitExt}"}
 }
