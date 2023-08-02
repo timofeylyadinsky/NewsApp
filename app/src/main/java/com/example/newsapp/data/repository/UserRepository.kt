@@ -1,10 +1,8 @@
 package com.example.newsapp.data.repository
 
 
-import android.content.Context
-import androidx.room.Room
+
 import com.example.newsapp.data.dao.UserDao
-import com.example.newsapp.data.db.UserDB
 import com.example.newsapp.data.entity.User
 import javax.inject.Inject
 
