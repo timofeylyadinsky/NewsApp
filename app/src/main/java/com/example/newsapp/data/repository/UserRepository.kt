@@ -3,22 +3,20 @@ package com.example.newsapp.data.repository
 
 import android.content.Context
 import androidx.room.Room
+import com.example.newsapp.data.dao.UserDao
 import com.example.newsapp.data.db.UserDB
 import com.example.newsapp.data.entity.User
+import javax.inject.Inject
 
-
-fun saveUser(user: User, context: Context) {
-    val db = Room
-        .databaseBuilder(context, UserDB::class.java, "userInfo")
-        .build()
-    val userDao = db.userDao()
-    userDao.saveUser(user)
+class UserRepository @Inject constructor(private val userDao: UserDao){
+    fun saveUser(user: User) {
+        userDao.saveUser(user)
+    }
+    fun getUserInfo(): User {
+        return userDao.getUser();
+    }
 }
 
-fun getUserInfo(context: Context): User {
-    val db = Room
-        .databaseBuilder(context, UserDB::class.java, "userInfo")
-        .build()
-    val userDao = db.userDao()
-    return userDao.getUser();
-}
+
+
+
