@@ -62,12 +62,10 @@ dependencies {
     implementation("androidx.compose.material3:material3")
 
     //Room
-    val room_version = "2.5.2"
-
-    implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
-// To use Kotlin annotation processing tool (kapt)
-    kapt("androidx.room:room-compiler:$room_version")
+    implementation(Deps.room)
+    annotationProcessor(Deps.roomCompiler)
+    // To use Kotlin annotation processing tool (kapt)
+    kapt(Deps.roomCompiler)
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
