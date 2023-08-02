@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -65,6 +66,10 @@ dependencies {
     implementation(Deps.room)
     annotationProcessor(Deps.roomCompiler)
     kapt(Deps.roomCompiler)
+
+    //Hilt
+    implementation(Deps.hilt)
+    kapt(Deps.hiltCompiler)
 
     testImplementation(Deps.junit)
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

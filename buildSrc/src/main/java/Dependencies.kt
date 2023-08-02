@@ -15,4 +15,7 @@ object Deps {
     val composePreview by lazy {"androidx.compose.ui:ui-tooling-preview"}
     val material3 by lazy {"androidx.compose.material3:material3"}
     val composeBom by lazy {"androidx.compose:compose-bom:${Versions.bom}"}
+
+    val hilt by lazy { "com.google.dagger:hilt-android:${Versions.hilt}" }
+    val hiltCompiler by lazy { "com.google.dagger:hilt-android-compiler:${Versions.hilt}"}
 }
