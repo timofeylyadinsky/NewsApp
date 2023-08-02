@@ -6,4 +6,5 @@ object Versions {
     const val junit = "4.13.2"
     const val bom = "2023.03.00"
     const val hilt = "2.44"
+    const val espresso = "3.5.1"
 }
