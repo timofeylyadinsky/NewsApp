@@ -11,20 +11,17 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-
 @InstallIn(SingletonComponent::class)
 @Module
 class DatabaseModule {
+
     @Provides
-    fun provideUserDao(userDB: UserDB): UserDao {
-        return userDB.userDao()
-    }
+    fun provideUserDao(userDB: UserDB) = userDB.userDao()
 
     @Provides
     @Singleton
-    fun provideUserDB(@ApplicationContext context: Context) : UserDB {
-        return Room
+    fun provideUserDB(@ApplicationContext context: Context) = Room
             .databaseBuilder(context, UserDB::class.java, "userInfo")
             .build()
-    }
+
 }
