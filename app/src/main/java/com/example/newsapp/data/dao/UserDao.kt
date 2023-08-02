@@ -9,7 +9,7 @@ import com.example.newsapp.data.entity.User
 interface UserDao {
 
     @Query("select * from userInfo where uid=1")
-    fun getUser(): User
+    fun getUser(): List<User>
 
     @Insert
     fun saveUser(user: User)
