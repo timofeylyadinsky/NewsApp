@@ -7,17 +7,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class PasscodeUseCases @Inject constructor(private val userRepository: UserRepository) {
-
-    suspend fun savePasscodeFirstTime(passcode: String) {
-
-    }
-
-    suspend fun skipPasscodeFirstTime() {
-        userRepository.saveUser(User(isLocked = false, passcode = 0))
-    }
-}
-
 class IsPasscodeRequiredUseCase @Inject constructor(
     private val userRepository: UserRepository,
     private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
@@ -29,16 +18,18 @@ class IsPasscodeRequiredUseCase @Inject constructor(
 
 class SavePasscodeUseCase @Inject constructor(
     private val userRepository: UserRepository,
-    private val defaultDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-    suspend operator fun invoke(passcode: String) = withContext(defaultDispatcher) {
+    suspend operator fun invoke(passcode: String) = withContext(ioDispatcher) {
         userRepository.saveUser(User(isLocked = true, passcode = passcode.toInt()))
     }
 }
 
 class SkipPasscodeUseCase @Inject constructor(
     private val userRepository: UserRepository,
-    private val defaultDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-
+    suspend operator fun invoke(passcode: String) = withContext(ioDispatcher) {
+        userRepository.saveUser(User(isLocked = false, passcode = 0))
+    }
 }
