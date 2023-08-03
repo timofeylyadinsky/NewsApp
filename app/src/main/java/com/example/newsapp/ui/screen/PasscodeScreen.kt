@@ -28,6 +28,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.newsapp.domain.IsPasscodeRequiredUseCase
 
 
 const val MAX_LENGTH = 4;
@@ -60,6 +61,7 @@ fun PasscodeRow() {
                     Toast.makeText(context, "Passcode should have 4 numbers", Toast.LENGTH_LONG)
                         .show()
                 } else {
+                    /*TODO() check first time password*/
                     /*TODO() Next Screen*/
                 }
             },
