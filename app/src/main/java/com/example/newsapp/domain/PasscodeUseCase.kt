@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class PasscodeUseCase @Inject constructor(private val userRepository: UserRepository) {
 
-    suspend fun isFirstStartApplication() = userRepository.getUserInfo().isEmpty()
+    suspend fun isFirstStartApplication() = userRepository.getUserInfo() == null
 
 
     suspend fun savePasscodeFirstTime(passcode: String) {
