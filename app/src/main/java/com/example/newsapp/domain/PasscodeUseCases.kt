@@ -9,9 +9,9 @@ import javax.inject.Inject
 
 class IsPasscodeRequiredUseCase @Inject constructor(
     private val userRepository: UserRepository,
-    private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
-    ) {
-    suspend operator fun invoke(): Boolean = withContext(defaultDispatcher) {
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+) {
+    suspend operator fun invoke(): Boolean = withContext(ioDispatcher) {
         userRepository.getUserInfo() == null
     }
 }
