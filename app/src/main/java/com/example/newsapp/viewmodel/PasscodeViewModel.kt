@@ -48,4 +48,12 @@ class PasscodeViewModel @Inject constructor(
         }
         return isSkip
     }
+
+    fun isPasscodeCorrect(passcode: String) : Boolean {
+        var isCorrect = true
+        viewModelScope.launch {
+            isCorrect = isPasscodeCorrectUseCase(passcode)
+        }
+        return isCorrect
+    }
 }
