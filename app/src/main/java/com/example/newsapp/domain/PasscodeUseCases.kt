@@ -33,3 +33,21 @@ class SkipPasscodeUseCase @Inject constructor(
         userRepository.saveUser(User(isLocked = false, passcode = ""))
     }
 }
+
+class IsPasscodeSkipUseCase @Inject constructor(
+    private val userRepository: UserRepository,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+) {
+    suspend operator fun invoke(passcode: String): Boolean = withContext(ioDispatcher) {
+        userRepository.getUserInfo()?.isLocked == false
+    }
+}
+
+class IsPasscodeCorrectUseCase @Inject constructor(
+    private val userRepository: UserRepository,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+) {
+    suspend operator fun invoke(passcode: String): Boolean = withContext(ioDispatcher) {
+        userRepository.getUserInfo()?.passcode == passcode
+    }
+}
