@@ -69,8 +69,12 @@ dependencies {
     kapt(Deps.roomCompiler)
 
     //Hilt
-    implementation(Deps.hilt)
+    implementation(Deps.dagger)
+    kapt(Deps.daggerCompiler)
+    implementation(Deps.hiltWork)
     kapt(Deps.hiltCompiler)
+    implementation(Deps.hiltNavigation)
+    implementation(Deps.workKtx)
 
     testImplementation(Deps.junit)
     androidTestImplementation(Deps.espressoCore)

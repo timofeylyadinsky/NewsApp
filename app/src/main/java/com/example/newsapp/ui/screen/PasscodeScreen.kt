@@ -31,7 +31,9 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.newsapp.domain.IsPasscodeRequiredUseCase
+import com.example.newsapp.viewmodel.PasscodeViewModel
 
 
 const val MAX_LENGTH = 4;
@@ -90,7 +92,9 @@ fun PasscodeRow() {
 
 @Preview(showBackground = true)
 @Composable
-fun FirstTimePasscodeStartScreen() {
+fun FirstTimePasscodeStartScreen(
+    viewModel: PasscodeViewModel = hiltViewModel()
+) {
     PasscodeRow()
     Column(
         modifier = Modifier
