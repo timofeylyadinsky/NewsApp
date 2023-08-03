@@ -48,6 +48,6 @@ class IsPasscodeCorrectUseCase @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
     suspend operator fun invoke(passcode: String): Boolean = withContext(ioDispatcher) {
-        userRepository.getUserInfo()!!.passcode == passcode
+        userRepository.getUserInfo()?.passcode == passcode
     }
 }
