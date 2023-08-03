@@ -39,6 +39,14 @@ import com.example.newsapp.viewmodel.PasscodeViewModel
 const val MAX_LENGTH = 4;
 
 @Composable
+fun PasscodeScreen(
+    passcodeViewModel: PasscodeViewModel = hiltViewModel()
+) {
+
+}
+
+
+@Composable
 @Preview(showBackground = true)
 fun PasscodeRow() {
     var password by rememberSaveable { mutableStateOf("") }
