@@ -8,5 +8,5 @@ import androidx.room.PrimaryKey
 data class User(
     @PrimaryKey(autoGenerate = false) val uid: Int = 1,
     val isLocked: Boolean,
-    val passcode: Int
+    val passcode: String
 )
