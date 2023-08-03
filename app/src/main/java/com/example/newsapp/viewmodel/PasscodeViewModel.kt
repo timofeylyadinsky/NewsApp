@@ -13,7 +13,7 @@ import javax.inject.Inject
 class PasscodeViewModel @Inject constructor(
     private val isPasscodeRequiredUseCase: IsPasscodeRequiredUseCase
 ) : ViewModel() {
-    fun getNumOfStartApp(): Boolean {
+    fun isFirstStart(): Boolean {
         var isFirst = true
         viewModelScope.launch {
             isFirst = isPasscodeRequiredUseCase.invoke()
