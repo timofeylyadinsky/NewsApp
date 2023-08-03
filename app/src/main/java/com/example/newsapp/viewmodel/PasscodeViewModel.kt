@@ -40,4 +40,12 @@ class PasscodeViewModel @Inject constructor(
             skipPasscodeUseCase.invoke()
         }
     }
+
+    fun isPasscodeSkip() : Boolean {
+        var isSkip = true
+        viewModelScope.launch {
+            isSkip = isPasscodeSkipUseCase.invoke()
+        }
+        return isSkip
+    }
 }
