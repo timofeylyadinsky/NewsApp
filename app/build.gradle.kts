@@ -61,6 +61,7 @@ dependencies {
     implementation(Deps.composeGraphic)
     implementation(Deps.composePreview)
     implementation(Deps.material3)
+    implementation(Deps.composeMaterial)
 
     //Room
     implementation(Deps.room)

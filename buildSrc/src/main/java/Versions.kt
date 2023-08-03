@@ -8,4 +8,5 @@ object Versions {
     const val hilt = "2.44"
     const val espresso = "3.5.1"
     const val junitExt = "1.1.5"
+    const val material = "1.4.3"
 }

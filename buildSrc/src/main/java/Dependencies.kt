@@ -22,4 +22,6 @@ object Deps {
     val espressoCore by lazy {"androidx.test.espresso:espresso-core:${Versions.espresso}"}
 
     val junitExt by lazy { "androidx.test.ext:junit:${Versions.junitExt}"}
+
+    val composeMaterial by lazy {"androidx.compose.material:material:${Versions.material}"}
 }
