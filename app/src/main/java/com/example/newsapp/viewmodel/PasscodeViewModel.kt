@@ -34,4 +34,10 @@ class PasscodeViewModel @Inject constructor(
             savePasscodeUseCase.invoke(passcode)
         }
     }
+
+    fun skipPasscode() {
+        viewModelScope.launch {
+            skipPasscodeUseCase.invoke()
+        }
+    }
 }

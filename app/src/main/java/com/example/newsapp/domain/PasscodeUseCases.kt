@@ -29,7 +29,7 @@ class SkipPasscodeUseCase @Inject constructor(
     private val userRepository: UserRepository,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-    suspend operator fun invoke(passcode: String) = withContext(ioDispatcher) {
+    suspend operator fun invoke() = withContext(ioDispatcher) {
         userRepository.saveUser(User(isLocked = false, passcode = ""))
     }
 }
