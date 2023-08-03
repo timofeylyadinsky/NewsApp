@@ -21,7 +21,7 @@ class SavePasscodeUseCase @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
     suspend operator fun invoke(passcode: String) = withContext(ioDispatcher) {
-        userRepository.saveUser(User(isLocked = true, passcode = passcode.toInt()))
+        userRepository.saveUser(User(isLocked = true, passcode = passcode))
     }
 }
 
@@ -30,6 +30,6 @@ class SkipPasscodeUseCase @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
     suspend operator fun invoke(passcode: String) = withContext(ioDispatcher) {
-        userRepository.saveUser(User(isLocked = false, passcode = 0))
+        userRepository.saveUser(User(isLocked = false, passcode = ""))
     }
 }
