@@ -143,3 +143,24 @@ fun FirstTimePasscodeStartScreen() {
     }
 }
 
+@Composable
+@Preview(showBackground = true)
+fun SecondTimePasscodeStartScreen() {
+    PasscodeRow()
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(0.5f),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Welcome!",
+            style = TextStyle(
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        )
+    }
+}
