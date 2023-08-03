@@ -39,7 +39,7 @@ class IsPasscodeSkipUseCase @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
     suspend operator fun invoke(passcode: String): Boolean = withContext(ioDispatcher) {
-        !userRepository.getUserInfo()!!.isLocked
+        userRepository.getUserInfo()?.isLocked == false
     }
 }
 
