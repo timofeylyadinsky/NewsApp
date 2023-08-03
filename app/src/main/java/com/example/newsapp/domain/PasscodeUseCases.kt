@@ -10,7 +10,7 @@ import javax.inject.Inject
 class PasscodeUseCases @Inject constructor(private val userRepository: UserRepository) {
 
     suspend fun savePasscodeFirstTime(passcode: String) {
-        userRepository.saveUser(User(isLocked = true, passcode = passcode.toInt()))
+
     }
 
     suspend fun skipPasscodeFirstTime() {
@@ -22,7 +22,9 @@ class IsPasscodeRequiredUseCase @Inject constructor(
     private val userRepository: UserRepository,
     private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default
     ) {
-    suspend operator fun invoke() = withContext(defaultDispatcher) { userRepository.getUserInfo() == null }
+    suspend operator fun invoke(): Boolean = withContext(defaultDispatcher) {
+        userRepository.getUserInfo() == null
+    }
 }
 
 class SavePasscodeUseCase @Inject constructor(
@@ -30,7 +32,7 @@ class SavePasscodeUseCase @Inject constructor(
     private val defaultDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
     suspend operator fun invoke(passcode: String) = withContext(defaultDispatcher) {
-
+        userRepository.saveUser(User(isLocked = true, passcode = passcode.toInt()))
     }
 }
 
