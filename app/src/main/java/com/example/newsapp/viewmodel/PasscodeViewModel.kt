@@ -22,10 +22,10 @@ class PasscodeViewModel @Inject constructor(
     private val isPasscodeSkipUseCase: IsPasscodeSkipUseCase,
     private val isPasscodeCorrectUseCase: IsPasscodeCorrectUseCase
 ) : ViewModel() {
+
     fun isFirstStart(): Boolean = runBlocking {
         isPasscodeRequiredUseCase.invoke()
     }
-
 
     fun savePasscode(passcode: String) {
         viewModelScope.launch {
@@ -46,5 +46,4 @@ class PasscodeViewModel @Inject constructor(
     fun isPasscodeCorrect(passcode: String): Boolean = runBlocking {
         isPasscodeCorrectUseCase.invoke(passcode)
     }
-
 }
