@@ -52,7 +52,9 @@ fun PasscodeScreen(
 
 @Composable
 @Preview(showBackground = true)
-fun PasscodeRow() {
+fun PasscodeRow(
+    passcodeViewModel: PasscodeViewModel = hiltViewModel()
+) {
     var password by rememberSaveable { mutableStateOf("") }
     val context = LocalContext.current
     Row(
@@ -82,6 +84,18 @@ fun PasscodeRow() {
                     Toast.makeText(context, "Passcode should have 4 numbers", Toast.LENGTH_LONG)
                         .show()
                 } else {
+                    if (passcodeViewModel.isFirstStart()) {
+                        passcodeViewModel.savePasscode(password)
+                    } else {
+                        if (passcodeViewModel.isPasscodeCorrect(password)) {
+                            Toast.makeText(context, "Passcode correct", Toast.LENGTH_LONG)
+                                .show()
+                        }
+                        else {
+                            Toast.makeText(context, "Passcode not correct", Toast.LENGTH_LONG)
+                                .show()
+                        }
+                    }
                     /*TODO() check first time password*/
                     /*TODO() Next Screen*/
                 }
