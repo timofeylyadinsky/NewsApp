@@ -7,12 +7,13 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 val BASE_URL = "https://newsapi.org/"
 
 interface ApiService {
-    @GET("v2/top-headlines?country=us&apiKey=")
-    fun getNews(): Call<News>
+    @GET("v2/top-headlines")
+    fun getNews(@Path("apiKey") key: String, @Path("country") country: String ="us"): Call<News>
 
     companion object Factory {
         fun create(): ApiService {
