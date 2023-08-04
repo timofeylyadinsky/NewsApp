@@ -11,8 +11,9 @@ import retrofit2.http.Query
 val BASE_URL = "https://newsapi.org/"
 
 interface ApiService {
+
     @GET("v2/top-headlines")
-    fun getNews(@Query("apiKey") key: String, @Query("country") country: String ="us"): Call<News>
+    fun getNews(@Query("apiKey") key: String, @Query("country") country: String = "us"): Call<News>
 
     companion object Factory {
         fun create(): ApiService {
