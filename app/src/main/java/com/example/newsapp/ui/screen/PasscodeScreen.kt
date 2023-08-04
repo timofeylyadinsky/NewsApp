@@ -24,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -32,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.newsapp.R
 import com.example.newsapp.domain.IsPasscodeRequiredUseCase
 import com.example.newsapp.viewmodel.PasscodeViewModel
 
@@ -81,17 +83,17 @@ fun PasscodeRow(
         Button(
             onClick = {
                 if (password.length < 4) {
-                    Toast.makeText(context, "Passcode should have 4 numbers", Toast.LENGTH_LONG)
+                    Toast.makeText(context, R.string.message_4_num, Toast.LENGTH_LONG)
                         .show()
                 } else {
                     if (passcodeViewModel.isFirstStart()) {
                         passcodeViewModel.savePasscode(password)
                     } else {
                         if (passcodeViewModel.isPasscodeCorrect(password)) {
-                            Toast.makeText(context, "Passcode correct", Toast.LENGTH_LONG)
+                            Toast.makeText(context, R.string.correct, Toast.LENGTH_LONG)
                                 .show()
                         } else {
-                            Toast.makeText(context, "Passcode not correct", Toast.LENGTH_LONG)
+                            Toast.makeText(context, R.string.incorrect, Toast.LENGTH_LONG)
                                 .show()
                         }
                     }
@@ -104,7 +106,7 @@ fun PasscodeRow(
             )
         ) {
             Text(
-                text = "Submit",
+                text = stringResource(id = R.string.submit),
                 style = TextStyle(
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
@@ -128,7 +130,7 @@ fun FirstTimePasscodeStartScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Welcome to News App",
+            text = stringResource(R.string.welcome_first),
             style = TextStyle(
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
@@ -136,7 +138,7 @@ fun FirstTimePasscodeStartScreen(
             )
         )
         Text(
-            text = "Create or Skip passcode",
+            text = stringResource(R.string.create_skip),
             style = TextStyle(
                 fontWeight = FontWeight.Bold,
                 fontSize = 12.sp,
@@ -162,7 +164,7 @@ fun FirstTimePasscodeStartScreen(
             )
         ) {
             Text(
-                text = "Skip",
+                text = stringResource(id = R.string.skip),
                 style = TextStyle(
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
@@ -184,7 +186,7 @@ fun SecondTimePasscodeStartScreen() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Welcome!",
+            text = stringResource(R.string.welcome_next),
             style = TextStyle(
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
