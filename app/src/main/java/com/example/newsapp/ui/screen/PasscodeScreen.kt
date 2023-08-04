@@ -51,7 +51,6 @@ fun PasscodeScreen(
     }
 }
 
-
 @Composable
 @Preview(showBackground = true)
 fun PasscodeRow(
