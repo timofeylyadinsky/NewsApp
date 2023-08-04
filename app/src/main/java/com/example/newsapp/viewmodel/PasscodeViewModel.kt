@@ -1,9 +1,7 @@
 package com.example.newsapp.viewmodel
 
-import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.newsapp.data.repository.UserRepository
 import com.example.newsapp.domain.IsPasscodeCorrectUseCase
 import com.example.newsapp.domain.IsPasscodeRequiredUseCase
 import com.example.newsapp.domain.IsPasscodeSkipUseCase
@@ -41,7 +39,7 @@ class PasscodeViewModel @Inject constructor(
         }
     }
 
-    fun isPasscodeSkip() : Boolean {
+    fun isPasscodeSkip(): Boolean {
         var isSkip = true
         viewModelScope.launch {
             isSkip = isPasscodeSkipUseCase.invoke()
@@ -49,7 +47,7 @@ class PasscodeViewModel @Inject constructor(
         return isSkip
     }
 
-    fun isPasscodeCorrect(passcode: String) : Boolean {
+    fun isPasscodeCorrect(passcode: String): Boolean {
         var isCorrect = true
         viewModelScope.launch {
             isCorrect = isPasscodeCorrectUseCase(passcode)
