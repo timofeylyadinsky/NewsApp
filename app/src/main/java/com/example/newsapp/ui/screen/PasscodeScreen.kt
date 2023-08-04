@@ -90,13 +90,11 @@ fun PasscodeRow(
                         if (passcodeViewModel.isPasscodeCorrect(password)) {
                             Toast.makeText(context, "Passcode correct", Toast.LENGTH_LONG)
                                 .show()
-                        }
-                        else {
+                        } else {
                             Toast.makeText(context, "Passcode not correct", Toast.LENGTH_LONG)
                                 .show()
                         }
                     }
-                    /*TODO() check first time password*/
                     /*TODO() Next Screen*/
                 }
             },
@@ -155,7 +153,8 @@ fun FirstTimePasscodeStartScreen(
     ) {
         Button(
             onClick = {
-                /*TODO() Save User without password*/
+                viewModel.skipPasscode()
+                /*TODO() Next Screen*/
             },
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = MaterialTheme.colorScheme.secondary,
