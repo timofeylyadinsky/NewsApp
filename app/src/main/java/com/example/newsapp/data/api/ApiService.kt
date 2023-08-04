@@ -15,16 +15,4 @@ interface ApiService {
     @GET("v2/top-headlines")
     fun getNews(@Query("apiKey") key: String, @Query("country") country: String = "us"): Call<News>
 
-    companion object Factory {
-        fun create(): ApiService {
-            val okHttpClient = OkHttpClient.Builder()
-                .build()
-            val retrofit: Retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(okHttpClient)
-                .build()
-            return retrofit.create(ApiService::class.java)
-        }
-    }
 }

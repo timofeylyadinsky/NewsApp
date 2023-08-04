@@ -1,5 +1,6 @@
 package com.example.newsapp.data.repository.module
 
+import com.example.newsapp.data.api.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,4 +31,9 @@ object ApiModule {
         .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
         .build()
+
+    @Provides
+    @Singleton
+    fun provideApiService(retrofit: Retrofit) = retrofit.create(ApiService::class.java)
+
 }
