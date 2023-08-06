@@ -38,7 +38,7 @@ import com.example.newsapp.domain.IsPasscodeRequiredUseCase
 import com.example.newsapp.viewmodel.PasscodeViewModel
 
 
-const val MAX_LENGTH = 4;
+private const val MAX_LENGTH = 4;
 
 @Composable
 fun PasscodeScreen(
