@@ -17,7 +17,7 @@ class GetNewsListUseCase @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) {
     suspend operator fun invoke(): List<Article> = withContext(ioDispatcher) {
-        var list = mutableListOf<Article>()
+        var list = listOf<Article>()
         val call = newsRepository.getNewsList()
         call.enqueue(object : Callback<News> {
 
@@ -26,7 +26,7 @@ class GetNewsListUseCase @Inject constructor(
             }
 
             override fun onResponse(call: Call<News>, response: Response<News>) {
-                list = response.body()!!.articles.toMutableList()
+                list = response.body()!!.articles
             }
 
         })
