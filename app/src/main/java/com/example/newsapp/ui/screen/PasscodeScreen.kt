@@ -44,7 +44,8 @@ private const val MAX_LENGTH = 4;
 fun PasscodeScreen(
     passcodeViewModel: PasscodeViewModel = hiltViewModel()
 ) {
-    if (passcodeViewModel.isFirstStart()) {
+    passcodeViewModel.firstStart()
+    if (passcodeViewModel.uiState.isFirst) {
         FirstTimePasscodeStartScreen()
     } else if (!passcodeViewModel.isPasscodeSkip()) {
         SecondTimePasscodeStartScreen()
@@ -85,7 +86,7 @@ fun PasscodeRow(
                     Toast.makeText(context, R.string.message_4_num, Toast.LENGTH_LONG)
                         .show()
                 } else {
-                    if (passcodeViewModel.isFirstStart()) {
+                    if (passcodeViewModel.uiState.isFirst) {
                         passcodeViewModel.savePasscode(password)
                     } else {
                         if (passcodeViewModel.isPasscodeCorrect(password)) {
