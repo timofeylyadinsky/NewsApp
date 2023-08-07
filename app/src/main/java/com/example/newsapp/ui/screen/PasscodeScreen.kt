@@ -46,7 +46,7 @@ fun PasscodeScreen(
 ) {
     if (passcodeViewModel.uiState.isFirst) {
         FirstTimePasscodeStartScreen()
-    } else if (!passcodeViewModel.isPasscodeSkip()) {
+    } else if (!passcodeViewModel.uiState.isLocked) {
         SecondTimePasscodeStartScreen()
     }
 }

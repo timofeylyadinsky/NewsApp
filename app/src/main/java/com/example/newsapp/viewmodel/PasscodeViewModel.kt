@@ -37,12 +37,6 @@ class PasscodeViewModel @Inject constructor(
         }
     }
 
-    fun firstStart() {
-        viewModelScope.launch {
-            uiState = uiState.copy(isFirst = isPasscodeRequiredUseCase(), isLocked = isPasscodeSkipUseCase())
-        }
-    }
-
     fun savePasscode(passcode: String) {
         viewModelScope.launch {
             savePasscodeUseCase.invoke(passcode)
@@ -55,10 +49,6 @@ class PasscodeViewModel @Inject constructor(
             skipPasscodeUseCase.invoke()
             uiState = uiState.copy(isLocked = false, isFirst = false)
         }
-    }
-
-    fun isPasscodeSkip(): Boolean = runBlocking {
-        isPasscodeSkipUseCase()
     }
 
     fun isPasscodeCorrect(passcode: String): Boolean = runBlocking {
