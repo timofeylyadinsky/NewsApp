@@ -88,7 +88,8 @@ fun PasscodeRow(
                     if (passcodeViewModel.uiState.isFirst) {
                         passcodeViewModel.savePasscode(password)
                     } else {
-                        if (passcodeViewModel.isPasscodeCorrect(password)) {
+                        passcodeViewModel.isPasscodeCorrect(password)
+                        if (passcodeViewModel.uiState.isPasscodeCorrect) {
                             Toast.makeText(context, R.string.correct, Toast.LENGTH_LONG)
                                 .show()
                         } else {
