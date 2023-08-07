@@ -30,6 +30,6 @@ class GetNewsListUseCase @Inject constructor(
             }
 
         })
-        return@withContext list
+        list
     }
 }
