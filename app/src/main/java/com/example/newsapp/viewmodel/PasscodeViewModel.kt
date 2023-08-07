@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.newsapp.data.repository.UserRepository
 import com.example.newsapp.domain.IsPasscodeCorrectUseCase
 import com.example.newsapp.domain.IsPasscodeRequiredUseCase
 import com.example.newsapp.domain.IsPasscodeSkipUseCase
@@ -28,6 +27,15 @@ class PasscodeViewModel @Inject constructor(
 
     var uiState by mutableStateOf(PasscodeUIState())
         private set
+
+    init {
+        runBlocking {
+            uiState = uiState.copy(
+                isFirst = isPasscodeRequiredUseCase(),
+                isLocked = isPasscodeSkipUseCase()
+            )
+        }
+    }
 
     fun firstStart() {
         viewModelScope.launch {

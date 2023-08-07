@@ -44,7 +44,6 @@ private const val MAX_LENGTH = 4;
 fun PasscodeScreen(
     passcodeViewModel: PasscodeViewModel = hiltViewModel()
 ) {
-    passcodeViewModel.firstStart()
     if (passcodeViewModel.uiState.isFirst) {
         FirstTimePasscodeStartScreen()
     } else if (!passcodeViewModel.isPasscodeSkip()) {
