@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">News App</string>
+    <string name="welcome_next">Welcome!</string>
+    <string name="welcome_first">Welcome to News App</string>
+    <string name="create_skip">Create or Skip passcode</string>
+    <string name="skip">Skip</string>
+    <string name="submit">Submit</string>
+    <string name="message_4_num">Passcode should have 4 numbers</string>
+    <string name="correct">Passcode correct</string>
+    <string name="incorrect">Passcode not correct</string>
+    <string name="empty_string" />
 </resources>

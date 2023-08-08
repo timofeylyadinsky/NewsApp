@@ -1,7 +1,6 @@
 package com.example.newsapp.data.repository
 
 
-
 import com.example.newsapp.data.dao.UserDao
 import com.example.newsapp.data.entity.User
 import javax.inject.Inject

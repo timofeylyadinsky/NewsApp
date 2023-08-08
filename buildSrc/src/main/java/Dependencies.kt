@@ -16,10 +16,18 @@ object Deps {
     val material3 by lazy {"androidx.compose.material3:material3"}
     val composeBom by lazy {"androidx.compose:compose-bom:${Versions.bom}"}
 
-    val hilt by lazy { "com.google.dagger:hilt-android:${Versions.hilt}" }
-    val hiltCompiler by lazy { "com.google.dagger:hilt-android-compiler:${Versions.hilt}"}
+    val dagger by lazy { "com.google.dagger:hilt-android:${Versions.dagger}" }
+    val daggerCompiler by lazy { "com.google.dagger:hilt-android-compiler:${Versions.dagger}"}
 
     val espressoCore by lazy {"androidx.test.espresso:espresso-core:${Versions.espresso}"}
 
     val junitExt by lazy { "androidx.test.ext:junit:${Versions.junitExt}"}
+
+    val composeMaterial by lazy {"androidx.compose.material:material:${Versions.material}"}
+
+    val hiltWork by lazy {"androidx.hilt:hilt-work:${Versions.hilt}"}
+    val hiltCompiler by lazy {"androidx.hilt:hilt-compiler:${Versions.hilt}"}
+    val hiltNavigation by lazy {"androidx.hilt:hilt-navigation-compose:${Versions.hilt}"}
+
+    val workKtx by lazy {"androidx.work:work-runtime-ktx:${Versions.work}"}
 }
