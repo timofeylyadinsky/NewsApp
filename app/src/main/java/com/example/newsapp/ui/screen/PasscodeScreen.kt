@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -38,13 +39,14 @@ fun PasscodeScreen(
     passcodeViewModel: PasscodeViewModel = hiltViewModel()
 ) {
     if (!passcodeViewModel.uiState.isPasscodeSkip) {
-        PasscodeRow()
+        PasscodeFieldRow()
+
     }
 }
 
 @Composable
 @Preview(showBackground = true)
-fun PasscodeRow(
+fun PasscodeFieldRow(
     passcodeViewModel: PasscodeViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
@@ -105,13 +107,12 @@ fun PasscodeRow(
         }
     }
 }
-/*
+
 @Preview(showBackground = true)
 @Composable
-fun FirstTimePasscodeStartScreen(
+fun PasscodeStartScreen(
     viewModel: PasscodeViewModel = hiltViewModel()
 ) {
-    PasscodeRow()
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -120,18 +121,10 @@ fun FirstTimePasscodeStartScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = stringResource(R.string.welcome_first),
+            text = stringResource(viewModel.uiState.welcomeMessage.toInt()),
             style = TextStyle(
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
-                color = MaterialTheme.colorScheme.onBackground
-            )
-        )
-        Text(
-            text = stringResource(R.string.create_skip),
-            style = TextStyle(
-                fontWeight = FontWeight.Bold,
-                fontSize = 12.sp,
                 color = MaterialTheme.colorScheme.onBackground
             )
         )
@@ -164,6 +157,7 @@ fun FirstTimePasscodeStartScreen(
     }
 }
 
+/*
 @Composable
 @Preview(showBackground = true)
 fun SecondTimePasscodeStartScreen() {

@@ -71,29 +71,10 @@ class PasscodeViewModel @Inject constructor(
             }
         }
     }
-    /* fun savePasscode(passcode: String) {
-         viewModelScope.launch {
-             savePasscodeUseCase.invoke(passcode)
-             uiState = uiState.copy(
-                 isLocked = true,
-                 isFirst = false
-             )
-         }
-     }
 
-     fun skipPasscode() {
-         viewModelScope.launch {
-             skipPasscodeUseCase.invoke()
-             uiState = uiState.copy(
-                 isLocked = true,
-                 isFirst = false
-             )
-         }
-     }
-
-     fun isPasscodeCorrect(passcode: String) {
-         runBlocking {
-             uiState = uiState.copy(isPasscodeCorrect = isPasscodeCorrectUseCase.invoke(passcode))
-         }
-     }*/
+    fun skipPasscode() {
+        viewModelScope.launch {
+            skipPasscodeUseCase()
+        }
+    }
 }
