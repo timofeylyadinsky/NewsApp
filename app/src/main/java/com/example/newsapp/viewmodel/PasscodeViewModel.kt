@@ -1,11 +1,14 @@
 package com.example.newsapp.viewmodel
 
+import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.util.copy
+import com.example.newsapp.R
 import com.example.newsapp.data.repository.UserRepository
 import com.example.newsapp.domain.IsPasscodeCorrectUseCase
 import com.example.newsapp.domain.IsPasscodeRequiredUseCase
@@ -33,8 +36,12 @@ class PasscodeViewModel @Inject constructor(
     init {
         runBlocking {
             uiState = uiState.copy(
-                isFirst = isPasscodeRequiredUseCase(),
-                isLocked = isPasscodeSkipUseCase()
+                isShowSkipButton = isPasscodeRequiredUseCase(),
+                isPasscodeSkip = isPasscodeSkipUseCase(),
+                welcomeMessage = (if (isPasscodeRequiredUseCase())
+                    (R.string.welcome_first).toString()
+                else
+                    R.string.welcome_next.toString())
             )
         }
     }
@@ -61,7 +68,7 @@ class PasscodeViewModel @Inject constructor(
 
     fun isPasscodeCorrect(passcode: String) {
         runBlocking {
-            uiState = uiState.copy(isPasscodeCorrect =  isPasscodeCorrectUseCase.invoke(passcode))
+            uiState = uiState.copy(isPasscodeCorrect = isPasscodeCorrectUseCase.invoke(passcode))
         }
     }
 }
