@@ -44,10 +44,8 @@ private const val MAX_LENGTH = 4;
 fun PasscodeScreen(
     passcodeViewModel: PasscodeViewModel = hiltViewModel()
 ) {
-    if (passcodeViewModel.uiState.isFirst) {
-        FirstTimePasscodeStartScreen()
-    } else if (!passcodeViewModel.uiState.isLocked) {
-        SecondTimePasscodeStartScreen()
+    if (!passcodeViewModel.uiState.isPasscodeSkip) {
+        PasscodeRow()
     }
 }
 
@@ -56,7 +54,6 @@ fun PasscodeScreen(
 fun PasscodeRow(
     passcodeViewModel: PasscodeViewModel = hiltViewModel()
 ) {
-    var password by rememberSaveable { mutableStateOf("") }
     val context = LocalContext.current
     Row(
         modifier = Modifier
@@ -66,8 +63,8 @@ fun PasscodeRow(
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         TextField(
-            value = password,
-            onValueChange = { if (it.length <= MAX_LENGTH) password = it },
+            value = passcodeViewModel.uiState.passcode,
+            onValueChange = { passcodeViewModel.changePasscodeValue(it) },
             singleLine = true,
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
@@ -115,7 +112,7 @@ fun PasscodeRow(
         }
     }
 }
-
+/*
 @Preview(showBackground = true)
 @Composable
 fun FirstTimePasscodeStartScreen(
@@ -195,3 +192,4 @@ fun SecondTimePasscodeStartScreen() {
         )
     }
 }
+*/

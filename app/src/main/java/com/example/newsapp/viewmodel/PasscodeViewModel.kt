@@ -21,6 +21,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
+private const val MAX_LENGTH = 4;
+
 @HiltViewModel
 class PasscodeViewModel @Inject constructor(
     private val isPasscodeRequiredUseCase: IsPasscodeRequiredUseCase,
@@ -46,29 +48,44 @@ class PasscodeViewModel @Inject constructor(
         }
     }
 
-    fun savePasscode(passcode: String) {
-        viewModelScope.launch {
-            savePasscodeUseCase.invoke(passcode)
-            uiState = uiState.copy(
-                isLocked = true,
-                isFirst = false
-            )
+    fun changePasscodeValue(passcode: String) {
+        if (passcode.length <= MAX_LENGTH) {
+            uiState = uiState.copy(passcode = passcode)
         }
     }
 
-    fun skipPasscode() {
+    fun clickSubmitButton(passcode: String) {
         viewModelScope.launch {
-            skipPasscodeUseCase.invoke()
-            uiState = uiState.copy(
-                isLocked = true,
-                isFirst = false
-            )
-        }
-    }
+            if (isPasscodeRequiredUseCase()) {
+                savePasscodeUseCase.invoke(passcode = passcode)
+            } else {
 
-    fun isPasscodeCorrect(passcode: String) {
-        runBlocking {
-            uiState = uiState.copy(isPasscodeCorrect = isPasscodeCorrectUseCase.invoke(passcode))
+            }
         }
     }
+    /* fun savePasscode(passcode: String) {
+         viewModelScope.launch {
+             savePasscodeUseCase.invoke(passcode)
+             uiState = uiState.copy(
+                 isLocked = true,
+                 isFirst = false
+             )
+         }
+     }
+
+     fun skipPasscode() {
+         viewModelScope.launch {
+             skipPasscodeUseCase.invoke()
+             uiState = uiState.copy(
+                 isLocked = true,
+                 isFirst = false
+             )
+         }
+     }
+
+     fun isPasscodeCorrect(passcode: String) {
+         runBlocking {
+             uiState = uiState.copy(isPasscodeCorrect = isPasscodeCorrectUseCase.invoke(passcode))
+         }
+     }*/
 }
