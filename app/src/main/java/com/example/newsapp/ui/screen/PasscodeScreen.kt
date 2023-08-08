@@ -1,5 +1,6 @@
 package com.example.newsapp.ui.screen
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,6 +19,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -40,7 +42,7 @@ fun PasscodeScreen(
 ) {
     if (!passcodeViewModel.uiState.isPasscodeSkip) {
         PasscodeFieldRow()
-
+        PasscodeStartScreen()
     }
 }
 
@@ -136,23 +138,25 @@ fun PasscodeStartScreen(
         verticalAlignment = Alignment.Bottom,
         horizontalArrangement = Arrangement.Center
     ) {
-        Button(
-            onClick = {
-                viewModel.skipPasscode()
-                /*TODO() Next Screen*/
-            },
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = MaterialTheme.colorScheme.secondary,
-                contentColor = MaterialTheme.colorScheme.onSecondary
-            )
-        ) {
-            Text(
-                text = stringResource(id = R.string.skip),
-                style = TextStyle(
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
+        AnimatedVisibility(visible = viewModel.uiState.isShowSkipButton) {
+            Button(
+                onClick = {
+                    viewModel.skipPasscode()
+                    /*TODO() Next Screen*/
+                },
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = MaterialTheme.colorScheme.secondary,
+                    contentColor = MaterialTheme.colorScheme.onSecondary
                 )
-            )
+            ) {
+                Text(
+                    text = stringResource(id = R.string.skip),
+                    style = TextStyle(
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+            }
         }
     }
 }
