@@ -19,8 +19,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -32,9 +30,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.newsapp.R
 import com.example.newsapp.viewmodel.PasscodeViewModel
-
-
-private const val MAX_LENGTH = 4;
 
 @Composable
 fun PasscodeScreen(
@@ -51,7 +46,6 @@ fun PasscodeScreen(
 fun PasscodeFieldRow(
     passcodeViewModel: PasscodeViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -123,13 +117,23 @@ fun PasscodeStartScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = stringResource(viewModel.uiState.welcomeMessage.toInt()),
+            text = stringResource(viewModel.uiState.welcomeMessageID),
             style = TextStyle(
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
                 color = MaterialTheme.colorScheme.onBackground
             )
         )
+        AnimatedVisibility(visible = viewModel.uiState.isShowSkipButton) {
+            Text(
+                text = stringResource(id = R.string.create_skip),
+                style = TextStyle(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+            )
+        }
     }
     Row(
         modifier = Modifier
@@ -160,27 +164,3 @@ fun PasscodeStartScreen(
         }
     }
 }
-
-/*
-@Composable
-@Preview(showBackground = true)
-fun SecondTimePasscodeStartScreen() {
-    PasscodeRow()
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(0.5f),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = stringResource(R.string.welcome_next),
-            style = TextStyle(
-                fontWeight = FontWeight.Bold,
-                fontSize = 24.sp,
-                color = MaterialTheme.colorScheme.onBackground
-            )
-        )
-    }
-}
-*/

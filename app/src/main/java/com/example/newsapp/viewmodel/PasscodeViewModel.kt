@@ -40,10 +40,10 @@ class PasscodeViewModel @Inject constructor(
             uiState = uiState.copy(
                 isShowSkipButton = isPasscodeRequiredUseCase(),
                 isPasscodeSkip = isPasscodeSkipUseCase(),
-                welcomeMessage = (if (isPasscodeRequiredUseCase())
-                    (R.string.welcome_first).toString()
+                welcomeMessageID = (if (isPasscodeRequiredUseCase())
+                    (R.string.welcome_first)
                 else
-                    R.string.welcome_next.toString())
+                    R.string.welcome_next)
             )
         }
     }
