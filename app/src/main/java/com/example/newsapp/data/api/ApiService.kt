@@ -13,6 +13,6 @@ val BASE_URL = "https://newsapi.org/"
 interface ApiService {
 
     @GET("v2/top-headlines")
-    fun getNews(@Query("apiKey") key: String, @Query("country") country: String = "us"): Call<News>
+    suspend fun getNews(@Query("apiKey") key: String = "", @Query("country") country: String = "us"): News
 
 }
