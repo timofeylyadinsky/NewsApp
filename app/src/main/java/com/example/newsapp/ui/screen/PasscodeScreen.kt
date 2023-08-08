@@ -55,7 +55,7 @@ fun PasscodeFieldRow(
         verticalArrangement = Arrangement.Bottom
     ) {
         Text(
-            text = passcodeViewModel.uiState.errorMessage,
+            text = stringResource(id = passcodeViewModel.uiState.errorMessage),
             style = TextStyle(
                 color = MaterialTheme.colorScheme.tertiary,
                 fontSize = 24.sp,
