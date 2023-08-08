@@ -54,12 +54,20 @@ class PasscodeViewModel @Inject constructor(
         }
     }
 
-    fun clickSubmitButton(passcode: String) {
+    fun clickSubmitButton() {
         viewModelScope.launch {
-            if (isPasscodeRequiredUseCase()) {
-                savePasscodeUseCase.invoke(passcode = passcode)
+            if (uiState.passcode.length < MAX_LENGTH) {
+                uiState = uiState.copy(errorMessage = "Password not correct only 4 num")
             } else {
-
+                if (isPasscodeRequiredUseCase()) {
+                    savePasscodeUseCase.invoke(passcode = uiState.passcode)
+                    /*TODO() next screen*/
+                } else if (isPasscodeCorrectUseCase.invoke(uiState.passcode)) {
+                    uiState = uiState.copy(errorMessage = "Password correct")
+                    /*TODO() next screen*/
+                } else {
+                    uiState = uiState.copy(errorMessage = "Password not correct")
+                }
             }
         }
     }

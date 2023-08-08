@@ -1,11 +1,9 @@
 package com.example.newsapp.ui.screen
 
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,10 +15,6 @@ import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -34,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.newsapp.R
-import com.example.newsapp.domain.IsPasscodeRequiredUseCase
 import com.example.newsapp.viewmodel.PasscodeViewModel
 
 
@@ -55,60 +48,60 @@ fun PasscodeRow(
     passcodeViewModel: PasscodeViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
-    Row(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceEvenly,
+            .background(MaterialTheme.colorScheme.background)
+            .padding(15.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Bottom
     ) {
-        TextField(
-            value = passcodeViewModel.uiState.passcode,
-            onValueChange = { passcodeViewModel.changePasscodeValue(it) },
-            singleLine = true,
-            visualTransformation = PasswordVisualTransformation(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
-            modifier = Modifier
-                .padding(horizontal = 0.dp)
-                .fillMaxWidth(0.5f),
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = MaterialTheme.colorScheme.primaryContainer,
-                textColor = MaterialTheme.colorScheme.onPrimaryContainer
+        Text(
+            text = passcodeViewModel.uiState.errorMessage,
+            style = TextStyle(
+                color = MaterialTheme.colorScheme.tertiary,
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
             )
         )
-        Button(
-            onClick = {
-                if (password.length < 4) {
-                    Toast.makeText(context, R.string.message_4_num, Toast.LENGTH_LONG)
-                        .show()
-                } else {
-                    if (passcodeViewModel.uiState.isFirst) {
-                        passcodeViewModel.savePasscode(password)
-                    } else {
-                        passcodeViewModel.isPasscodeCorrect(password)
-                        if (passcodeViewModel.uiState.isPasscodeCorrect) {
-                            Toast.makeText(context, R.string.correct, Toast.LENGTH_LONG)
-                                .show()
-                        } else {
-                            Toast.makeText(context, R.string.incorrect, Toast.LENGTH_LONG)
-                                .show()
-                        }
-                    }
-                    /*TODO() Next Screen*/
-                }
-            },
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary
-            )
+        Row(
+            modifier = Modifier
+                .fillMaxSize(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
-            Text(
-                text = stringResource(id = R.string.submit),
-                style = TextStyle(
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
+            TextField(
+                value = passcodeViewModel.uiState.passcode,
+                onValueChange = { passcodeViewModel.changePasscodeValue(it) },
+                singleLine = true,
+                visualTransformation = PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
+                modifier = Modifier
+                    .padding(horizontal = 0.dp)
+                    .fillMaxWidth(0.5f),
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = MaterialTheme.colorScheme.primaryContainer,
+                    textColor = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             )
+            Button(
+                onClick = {
+                    passcodeViewModel.clickSubmitButton()
+                    /*TODO() Next Screen*/
+                },
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary
+                )
+            ) {
+                Text(
+                    text = stringResource(id = R.string.submit),
+                    style = TextStyle(
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+            }
         }
     }
 }
