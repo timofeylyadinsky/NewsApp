@@ -1,9 +1,8 @@
 package com.example.newsapp.ui.state
 
-import com.example.newsapp.data.entity.User
-
 data class PasscodeUIState(
-    val isLocked: Boolean = true,
-    val isFirst: Boolean = true,
-    val isPasscodeCorrect: Boolean = false
+    val welcomeMessage: String = "",
+    val passcode: String = "",
+    val isShowSkipButton: Boolean = true,
+    val errorMessage: String = "Password not correct"
 )
