@@ -1,22 +1,17 @@
 package com.example.newsapp.domain
 
-import android.util.Log
-import com.example.newsapp.data.entity.Article
-import com.example.newsapp.data.entity.News
+import com.example.newsapp.data.entity.ArticleDto
 import com.example.newsapp.data.repository.NewsRepository
 import com.example.newsapp.data.repository.module.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import javax.inject.Inject
 
 class GetNewsListUseCase @Inject constructor(
     private val newsRepository: NewsRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) {
-    suspend operator fun invoke(): List<Article> = withContext(ioDispatcher) {
+    suspend operator fun invoke(): List<ArticleDto> = withContext(ioDispatcher) {
         newsRepository.getNewsList().articles
     }
 }
