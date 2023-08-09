@@ -17,19 +17,6 @@ class GetNewsListUseCase @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) {
     suspend operator fun invoke(): List<Article> = withContext(ioDispatcher) {
-        var list = listOf<Article>()
-        val call = newsRepository.getNewsList()
-        call.enqueue(object : Callback<News> {
-
-            override fun onFailure(call: Call<News>, t: Throwable) {
-                Log.d("!!!", t.toString())
-            }
-
-            override fun onResponse(call: Call<News>, response: Response<News>) {
-                list = response.body()!!.articles
-            }
-
-        })
-        list
+        newsRepository.getNewsList().articles
     }
 }
