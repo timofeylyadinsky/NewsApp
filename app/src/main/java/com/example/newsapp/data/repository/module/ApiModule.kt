@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -21,7 +22,13 @@ object ApiModule {
 
     @Provides
     @Singleton
-    fun provideOkHTTPClient() = OkHttpClient.Builder()
+    fun provideOkHTTPClient() = OkHttpClient.Builder().apply {
+        addInterceptor(Interceptor { chain ->
+            val builder = chain.request().url().newBuilder().addQueryParameter("apiKey", "").build()
+            val request = chain.request().newBuilder().url(builder).build()
+            return@Interceptor chain.proceed(request)
+        })
+    }
         .build()
 
     @Provides
