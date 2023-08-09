@@ -1,11 +1,11 @@
 package com.example.newsapp.data.entity
 
-data class News(
-    val articles: List<Article>
+data class NewsDto(
+    val articles: List<ArticleDto>
 )
 
-data class Article(
-    val source: Source,
+data class ArticleDto(
+    val source: SourceDto,
     val author: String,
     val title: String,
     val description: String,
@@ -14,6 +14,6 @@ data class Article(
     val publishedAt: String
 )
 
-data class Source(
+data class SourceDto(
     val name: String
 )
