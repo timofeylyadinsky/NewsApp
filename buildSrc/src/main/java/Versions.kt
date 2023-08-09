@@ -11,4 +11,5 @@ object Versions {
     const val material = "1.4.3"
     const val hilt = "1.0.0"
     const val work = "2.8.0"
+    const val retrofit = "2.9.0"
 }

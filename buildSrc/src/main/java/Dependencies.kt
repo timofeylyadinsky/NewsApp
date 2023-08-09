@@ -30,4 +30,7 @@ object Deps {
     val hiltNavigation by lazy {"androidx.hilt:hilt-navigation-compose:${Versions.hilt}"}
 
     val workKtx by lazy {"androidx.work:work-runtime-ktx:${Versions.work}"}
+
+    val retrofit by lazy {"com.squareup.retrofit2:retrofit:${Versions.retrofit}"}
+    val retrofitGson by lazy {"com.squareup.retrofit2:converter-gson:${Versions.retrofit}"}
 }
