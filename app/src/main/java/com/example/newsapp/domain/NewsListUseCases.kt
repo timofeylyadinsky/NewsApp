@@ -25,7 +25,7 @@ class MapArticleListUseCase @Inject constructor(
 ) {
     suspend operator fun invoke() = withContext(ioDispatcher) {
         when (val response = getNewsResponseUseCase.invoke()) {
-            is NetworkResult.Success -> NetworkResult.Success(response.data.toNews())
+            is NetworkResult.Success -> NetworkResult.Success(response.data.toNews().articles)
             is NetworkResult.Error -> NetworkResult.Error(
                 code = response.code,
                 message = response.message
