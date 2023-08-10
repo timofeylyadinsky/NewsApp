@@ -8,6 +8,8 @@ import com.example.newsapp.domain.entity.News
 import com.example.newsapp.domain.entity.NewsData
 import com.example.newsapp.domain.entity.toNews
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -24,10 +26,10 @@ class MapArticleListUseCase @Inject constructor(
     private val getNewsResponseUseCase: GetNewsResponseUseCase,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) {
-    suspend operator fun invoke() = withContext(ioDispatcher) {
+    suspend operator fun invoke(): Flow<NewsData> = withContext(ioDispatcher) {
         when (val response = getNewsResponseUseCase.invoke()) {
-            is NetworkResult.Success -> NewsData(response.data.toNews().articles)
-            is NetworkResult.Error -> NewsData(errorMessage = "${response.code} : ${response.message}")
+            is NetworkResult.Success -> flow { emit(NewsData(response.data.toNews().articles)) }
+            is NetworkResult.Error -> flow { emit(NewsData(errorMessage = "${response.code} : ${response.message}")) }
         }
     }
 }
