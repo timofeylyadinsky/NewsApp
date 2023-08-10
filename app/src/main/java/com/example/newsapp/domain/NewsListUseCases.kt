@@ -5,6 +5,7 @@ import com.example.newsapp.data.entity.NewsDto
 import com.example.newsapp.data.repository.NewsRepository
 import com.example.newsapp.data.repository.module.IoDispatcher
 import com.example.newsapp.domain.entity.News
+import com.example.newsapp.domain.entity.NewsData
 import com.example.newsapp.domain.entity.toNews
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -25,11 +26,8 @@ class MapArticleListUseCase @Inject constructor(
 ) {
     suspend operator fun invoke() = withContext(ioDispatcher) {
         when (val response = getNewsResponseUseCase.invoke()) {
-            is NetworkResult.Success -> NetworkResult.Success(response.data.toNews().articles)
-            is NetworkResult.Error -> NetworkResult.Error(
-                code = response.code,
-                message = response.message
-            )
+            is NetworkResult.Success -> NewsData(response.data.toNews().articles)
+            is NetworkResult.Error -> NewsData(errorMessage = "${response.code} : ${response.message}")
         }
     }
 }
