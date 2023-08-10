@@ -27,9 +27,11 @@ class MapArticleListUseCase @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) {
     suspend operator fun invoke(): Flow<NewsData> = withContext(ioDispatcher) {
-        when (val response = getNewsResponseUseCase.invoke()) {
-            is NetworkResult.Success -> flow { emit(NewsData(response.data.toNews().articles)) }
-            is NetworkResult.Error -> flow { emit(NewsData(errorMessage = "${response.code} : ${response.message}")) }
+        flow {
+            when (val response = getNewsResponseUseCase.invoke()) {
+                is NetworkResult.Success ->  emit(NewsData(response.data.toNews().articles))
+                is NetworkResult.Error ->  emit(NewsData(errorMessage = "${response.code} : ${response.message}"))
+            }
         }
     }
 }
