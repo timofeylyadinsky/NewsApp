@@ -2,6 +2,7 @@ package com.example.newsapp.data.repository
 
 import com.example.newsapp.data.api.ApiService
 import com.example.newsapp.data.api.NetworkResult
+import com.example.newsapp.data.entity.NewsDto
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -23,4 +24,6 @@ class NewsRepository @Inject constructor(
             NetworkResult.Error(e.hashCode(), e.message)
         }
     }
+
+    suspend fun dataSource() :NetworkResult<NewsDto> = handleApi { apiService.getNews() }
 }
