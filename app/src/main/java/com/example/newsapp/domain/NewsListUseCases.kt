@@ -1,10 +1,8 @@
 package com.example.newsapp.domain
 
 import com.example.newsapp.data.api.NetworkResult
-import com.example.newsapp.data.entity.NewsDto
 import com.example.newsapp.data.repository.NewsRepository
 import com.example.newsapp.data.repository.module.IoDispatcher
-import com.example.newsapp.domain.entity.News
 import com.example.newsapp.domain.entity.NewsData
 import com.example.newsapp.domain.entity.toNews
 import kotlinx.coroutines.CoroutineDispatcher
