@@ -17,8 +17,14 @@ class GetNewsResponseUseCase @Inject constructor(
     private val newsRepository: NewsRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) {
-    suspend operator fun invoke(): NetworkResult<NewsDto> = withContext(ioDispatcher) {
-        newsRepository.dataSource()
+    suspend operator fun invoke(): NetworkResult<News> = withContext(ioDispatcher) {
+        when (val response = newsRepository.dataSource()) {
+            is NetworkResult.Success -> NetworkResult.Success(data = response.data.toNews())
+            is NetworkResult.Error -> NetworkResult.Error(
+                code = response.code,
+                message = response.message
+            )
+        }
     }
 }
 
@@ -29,8 +35,8 @@ class MapArticleListUseCase @Inject constructor(
     suspend operator fun invoke(): Flow<NewsData> = withContext(ioDispatcher) {
         flow {
             when (val response = getNewsResponseUseCase.invoke()) {
-                is NetworkResult.Success ->  emit(NewsData(response.data.toNews().articles))
-                is NetworkResult.Error ->  emit(NewsData(errorMessage = "${response.code} : ${response.message}"))
+                is NetworkResult.Success -> emit(NewsData(response.data.articles))
+                is NetworkResult.Error -> emit(NewsData(errorMessage = "${response.code} : ${response.message}"))
             }
         }
     }
