@@ -48,7 +48,14 @@ fun NewsListScreen(
         }
 
         is NewsListUIState.ERROR -> {
-            Text(text = "failure ${(state as NewsListUIState.ERROR).message}")
+            Text(
+                text = "failure ${(state as NewsListUIState.ERROR).message}",
+                style = TextStyle(
+                    fontSize = 24.sp,
+                    color = MaterialTheme.colorScheme.error,
+                    fontWeight = FontWeight.Bold
+                )
+            )
         }
 
         is NewsListUIState.SUCCESS -> {
