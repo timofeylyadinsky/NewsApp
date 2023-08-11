@@ -30,7 +30,8 @@ class NewsListViewModel @Inject constructor(
             }
             newsData.collect { data ->
                 if (data.errorMessage.isNullOrEmpty()) uiState.value =
-                    NewsListUIState.SUCCESS(data.news) else uiState.value =
+                    NewsListUIState.SUCCESS(data.news)
+                else uiState.value =
                     NewsListUIState.ERROR(data.errorMessage)
             }
         } catch (e: Exception) {

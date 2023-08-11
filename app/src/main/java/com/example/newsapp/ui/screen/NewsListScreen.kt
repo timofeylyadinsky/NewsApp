@@ -28,11 +28,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.example.newsapp.R
 import com.example.newsapp.domain.entity.Article
 import com.example.newsapp.ui.state.NewsListUIState
 import com.example.newsapp.viewmodel.NewsListViewModel
+import com.skydoves.landscapist.ImageOptions
+import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun NewsListScreen(
@@ -54,9 +55,58 @@ fun NewsListScreen(
             val articles = (state as NewsListUIState.SUCCESS).articles
             Column(modifier = Modifier.verticalScroll(state = rememberScrollState())) {
                 articles.forEach {
-                    //NewsItem(article = it)
+                    NewsItem(article = it)
                 }
             }
+        }
+    }
+}
+
+
+@Composable
+fun NewsItem(article: Article) {
+    Card(
+        modifier = Modifier
+            .padding(15.dp)
+            .fillMaxWidth()
+            .fillMaxHeight(0.2f)
+            .clickable(onClick = { }),
+        elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.primaryContainer)
+                .padding(10.dp)
+        ) {
+            GlideImage(
+                imageModel = {
+                    article.urlToImage
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .alpha(0.8f),
+                imageOptions = ImageOptions(contentScale = ContentScale.Fit),
+                previewPlaceholder = R.drawable.ic_launcher_background
+            )
+            Text(
+                text = article.title.toString(),
+                modifier = Modifier.padding(top = 5.dp, bottom = 15.dp),
+                style = TextStyle(
+                    fontSize = 22.sp,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    fontWeight = FontWeight.W600,
+                    fontStyle = FontStyle.Italic
+                )
+            )
+            Text(
+                text = article.source?.name.toString(),
+                modifier = Modifier.padding(top = 0.dp, bottom = 5.dp),
+                style = TextStyle(
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    fontWeight = FontWeight.W300
+                )
+            )
         }
     }
 }
