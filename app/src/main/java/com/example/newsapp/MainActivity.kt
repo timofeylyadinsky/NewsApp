@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.newsapp.ui.screen.NewsListScreen
-import com.example.newsapp.ui.screen.PasscodeScreen
 import com.example.newsapp.ui.theme.NewsAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,7 +17,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NewsAppTheme {
-                //PasscodeScreen()
                 NewsListScreen()
             }
         }
