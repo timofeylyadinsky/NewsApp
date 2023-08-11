@@ -81,6 +81,10 @@ dependencies {
     implementation(Deps.retrofit)
     implementation(Deps.retrofitGson)
 
+    //Glide
+    implementation(Deps.glide)
+    implementation(Deps.landscapistGlide)
+
     testImplementation(Deps.junit)
     androidTestImplementation(Deps.espressoCore)
     androidTestImplementation(platform(Deps.composeBom))
