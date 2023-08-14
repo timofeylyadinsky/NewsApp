@@ -5,5 +5,6 @@ data class PasscodeUIState(
     var passcode: String = "",
     val isShowSkipButton: Boolean = true,
     val isPasscodeSkip: Boolean = false,
-    val errorMessage: Int = 0
+    val errorMessage: Int = 0,
+    val isNavigateNextScreen: Boolean = false
 )

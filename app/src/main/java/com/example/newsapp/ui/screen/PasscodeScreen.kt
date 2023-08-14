@@ -88,9 +88,11 @@ fun PasscodeFieldRow(
             Button(
                 onClick = {
                     passcodeViewModel.clickSubmitButton()
-                    navController.navigate(Screen.NewsListScreen.route) {
-                        popUpTo(navController.graph.id) {
-                            inclusive = true
+                    if (passcodeViewModel.uiState.isNavigateNextScreen) {
+                        navController.navigate(Screen.NewsListScreen.route) {
+                            popUpTo(navController.graph.id) {
+                                inclusive = true
+                            }
                         }
                     }
                     /*TODO() Next Screen*/

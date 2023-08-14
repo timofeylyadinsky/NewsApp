@@ -13,6 +13,7 @@ import com.example.newsapp.domain.SavePasscodeUseCase
 import com.example.newsapp.domain.SkipPasscodeUseCase
 import com.example.newsapp.ui.state.PasscodeUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
@@ -52,15 +53,18 @@ class PasscodeViewModel @Inject constructor(
     }
 
     fun clickSubmitButton() {
-        viewModelScope.launch {
+        //viewModelScope.launch(Dispatchers.Main) {
+        runBlocking {
             if (uiState.passcode.length < MAX_LENGTH) {
                 uiState = uiState.copy(errorMessage = R.string.message_4_num)
             } else {
                 if (isPasscodeRequiredUseCase()) {
                     savePasscodeUseCase.invoke(passcode = uiState.passcode)
+                    uiState = uiState.copy(isNavigateNextScreen = true)
                     /*TODO() next screen*/
                 } else if (isPasscodeCorrectUseCase.invoke(uiState.passcode)) {
                     uiState = uiState.copy(errorMessage = R.string.correct)
+                    uiState = uiState.copy(isNavigateNextScreen = true)
                     /*TODO() next screen*/
                 } else {
                     uiState = uiState.copy(errorMessage = R.string.incorrect)
