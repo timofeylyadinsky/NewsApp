@@ -3,7 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
     id("com.google.dagger.hilt.android")
-    id("com.google.android.secrets-gradle-plugin") version "1.1.0"
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -41,6 +41,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
@@ -80,6 +81,10 @@ dependencies {
     //Retrofit
     implementation(Deps.retrofit)
     implementation(Deps.retrofitGson)
+
+    //Glide
+    implementation(Deps.glide)
+    implementation(Deps.landscapistGlide)
 
     testImplementation(Deps.junit)
     androidTestImplementation(Deps.espressoCore)

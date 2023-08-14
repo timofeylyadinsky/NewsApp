@@ -1,5 +1,6 @@
 package com.example.newsapp.data.repository.module
 
+import com.example.newsapp.BuildConfig
 import com.example.newsapp.data.api.ApiService
 import dagger.Module
 import dagger.Provides
@@ -24,7 +25,7 @@ object ApiModule {
     @Singleton
     fun provideOkHTTPClient() = OkHttpClient.Builder().apply {
         addInterceptor(Interceptor { chain ->
-            val builder = chain.request().url().newBuilder().addQueryParameter("apiKey", "").build()
+            val builder = chain.request().url().newBuilder().addQueryParameter("apiKey", BuildConfig.API_KEY).build()
             val request = chain.request().newBuilder().url(builder).build()
             return@Interceptor chain.proceed(request)
         })
