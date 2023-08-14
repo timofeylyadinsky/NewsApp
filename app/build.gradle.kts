@@ -86,6 +86,9 @@ dependencies {
     implementation(Deps.glide)
     implementation(Deps.landscapistGlide)
 
+    //Navigation
+    implementation(Deps.navigation)
+
     testImplementation(Deps.junit)
     androidTestImplementation(Deps.espressoCore)
     androidTestImplementation(platform(Deps.composeBom))

@@ -28,23 +28,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.newsapp.R
+import com.example.newsapp.ui.navigation.Screen
 import com.example.newsapp.viewmodel.PasscodeViewModel
 
 @Composable
 fun PasscodeScreen(
-    passcodeViewModel: PasscodeViewModel = hiltViewModel()
+    passcodeViewModel: PasscodeViewModel = hiltViewModel(),
+    navController: NavController
 ) {
     if (!passcodeViewModel.uiState.isPasscodeSkip) {
-        PasscodeFieldRow()
-        PasscodeStartScreen()
+        PasscodeFieldRow(navController = navController)
+        PasscodeStartScreen(navController = navController)
     }
 }
 
 @Composable
-@Preview(showBackground = true)
 fun PasscodeFieldRow(
-    passcodeViewModel: PasscodeViewModel = hiltViewModel()
+    passcodeViewModel: PasscodeViewModel = hiltViewModel(),
+    navController: NavController
 ) {
     Column(
         modifier = Modifier
@@ -85,6 +88,11 @@ fun PasscodeFieldRow(
             Button(
                 onClick = {
                     passcodeViewModel.clickSubmitButton()
+                    navController.navigate(Screen.NewsListScreen.route) {
+                        popUpTo(navController.graph.id) {
+                            inclusive = true
+                        }
+                    }
                     /*TODO() Next Screen*/
                 },
                 colors = ButtonDefaults.buttonColors(
@@ -104,10 +112,10 @@ fun PasscodeFieldRow(
     }
 }
 
-@Preview(showBackground = true)
 @Composable
 fun PasscodeStartScreen(
-    viewModel: PasscodeViewModel = hiltViewModel()
+    viewModel: PasscodeViewModel = hiltViewModel(),
+    navController: NavController
 ) {
     Column(
         modifier = Modifier
@@ -146,6 +154,11 @@ fun PasscodeStartScreen(
             Button(
                 onClick = {
                     viewModel.skipPasscode()
+                    navController.navigate(Screen.NewsListScreen.route) {
+                        popUpTo(navController.graph.id) {
+                            inclusive = true
+                        }
+                    }
                     /*TODO() Next Screen*/
                 },
                 colors = ButtonDefaults.buttonColors(
