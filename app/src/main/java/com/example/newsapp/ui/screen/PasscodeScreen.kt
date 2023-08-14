@@ -41,6 +41,12 @@ fun PasscodeScreen(
     if (!passcodeViewModel.uiState.isPasscodeSkip) {
         PasscodeFieldRow(navController = navController)
         PasscodeStartScreen(navController = navController)
+    } else {
+        navController.navigate(Screen.NewsListScreen.route) {
+            popUpTo(navController.graph.id) {
+                inclusive = true
+            }
+        }
     }
 }
 

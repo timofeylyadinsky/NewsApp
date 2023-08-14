@@ -15,7 +15,7 @@ fun NewsAppNavigation() {
             PasscodeScreen(navController = navController)
         }
         composable(route = Screen.NewsListScreen.route) {
-            NewsListScreen(/*navController = navController*/)
+            NewsListScreen(navController = navController)
         }
         composable(route = Screen.NewsDetailsScreen.route) {
         }
