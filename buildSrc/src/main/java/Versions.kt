@@ -14,5 +14,5 @@ object Versions {
     const val retrofit = "2.9.0"
     const val glide = "4.15.1"
     const val landscapistGlide = "2.2.3"
-    const val navigation = "2.7.0"
+    const val navigation = "2.6.0"
 }
