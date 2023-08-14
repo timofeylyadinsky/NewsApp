@@ -53,7 +53,6 @@ class PasscodeViewModel @Inject constructor(
     }
 
     fun clickSubmitButton() {
-        //viewModelScope.launch(Dispatchers.Main) {
         runBlocking {
             if (uiState.passcode.length < MAX_LENGTH) {
                 uiState = uiState.copy(errorMessage = R.string.message_4_num)
