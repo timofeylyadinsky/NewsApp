@@ -13,7 +13,6 @@ import com.example.newsapp.domain.SavePasscodeUseCase
 import com.example.newsapp.domain.SkipPasscodeUseCase
 import com.example.newsapp.ui.state.PasscodeUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
