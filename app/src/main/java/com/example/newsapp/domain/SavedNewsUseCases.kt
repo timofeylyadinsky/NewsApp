@@ -11,7 +11,16 @@ class SaveNewsUseCase @Inject constructor(
     private val newsRepository: NewsRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) {
-    suspend fun invoke(url: String) = withContext(ioDispatcher) {
+    suspend operator fun invoke(url: String) = withContext(ioDispatcher) {
         newsRepository.saveNews(SavedNewsDbo(url = url))
+    }
+}
+
+class DeleteNewsUseCase @Inject constructor(
+    private val newsRepository: NewsRepository,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+) {
+    suspend operator fun invoke(url: String) = withContext(ioDispatcher) {
+        newsRepository.deleteNews(url)
     }
 }
