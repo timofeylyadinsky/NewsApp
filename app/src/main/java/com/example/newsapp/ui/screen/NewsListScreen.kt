@@ -28,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.newsapp.R
 import com.example.newsapp.domain.entity.Article
 import com.example.newsapp.ui.state.NewsListUIState
@@ -37,7 +38,8 @@ import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun NewsListScreen(
-    newsListViewModel: NewsListViewModel = hiltViewModel()
+    newsListViewModel: NewsListViewModel = hiltViewModel(),
+    navController: NavController
 ) {
     val state by newsListViewModel.uiState.collectAsState()
     when (state) {
@@ -62,7 +64,7 @@ fun NewsListScreen(
             val articles = (state as NewsListUIState.SUCCESS).articles
             Column(modifier = Modifier.verticalScroll(state = rememberScrollState())) {
                 articles.forEach {
-                    NewsItem(article = it)
+                    NewsItem(article = it, navController = navController)
                 }
             }
         }
@@ -71,7 +73,10 @@ fun NewsListScreen(
 
 
 @Composable
-fun NewsItem(article: Article) {
+fun NewsItem(
+    article: Article,
+    navController: NavController
+) {
     Card(
         modifier = Modifier
             .padding(15.dp)

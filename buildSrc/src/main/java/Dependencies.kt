@@ -36,4 +36,6 @@ object Deps {
 
     val glide by lazy {"com.github.bumptech.glide:glide:${Versions.glide}"}
     val landscapistGlide by lazy {"com.github.skydoves:landscapist-glide:${Versions.landscapistGlide}"}
+
+    val navigation by lazy { "androidx.navigation:navigation-compose:${Versions.navigation}" }
 }

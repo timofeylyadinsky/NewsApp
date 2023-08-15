@@ -52,15 +52,17 @@ class PasscodeViewModel @Inject constructor(
     }
 
     fun clickSubmitButton() {
-        viewModelScope.launch {
+        runBlocking {
             if (uiState.passcode.length < MAX_LENGTH) {
                 uiState = uiState.copy(errorMessage = R.string.message_4_num)
             } else {
                 if (isPasscodeRequiredUseCase()) {
                     savePasscodeUseCase.invoke(passcode = uiState.passcode)
+                    uiState = uiState.copy(isNavigateNextScreen = true)
                     /*TODO() next screen*/
                 } else if (isPasscodeCorrectUseCase.invoke(uiState.passcode)) {
                     uiState = uiState.copy(errorMessage = R.string.correct)
+                    uiState = uiState.copy(isNavigateNextScreen = true)
                     /*TODO() next screen*/
                 } else {
                     uiState = uiState.copy(errorMessage = R.string.incorrect)
