@@ -31,10 +31,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.newsapp.R
 import com.example.newsapp.domain.entity.Article
+import com.example.newsapp.ui.navigation.Screen
 import com.example.newsapp.ui.state.NewsListUIState
 import com.example.newsapp.viewmodel.NewsListViewModel
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @Composable
 fun NewsListScreen(
@@ -82,7 +85,16 @@ fun NewsItem(
             .padding(15.dp)
             .fillMaxWidth()
             .fillMaxHeight(0.2f)
-            .clickable(onClick = { }),
+            .clickable(onClick = {
+                navController.navigate(
+                    Screen.NewsDetailsScreen.route + "/${
+                        URLEncoder.encode(
+                            article.url,
+                            StandardCharsets.UTF_8.toString()
+                        )
+                    }"
+                )
+            }),
         elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
     ) {
         Column(
