@@ -3,6 +3,7 @@ package com.example.newsapp.data.repository.module
 import android.content.Context
 import androidx.room.Room
 import com.example.newsapp.data.dao.UserDao
+import com.example.newsapp.data.db.SavedNewsDB
 import com.example.newsapp.data.db.UserDB
 import dagger.Module
 import dagger.Provides
@@ -25,4 +26,11 @@ class DatabaseModule {
             .databaseBuilder(context, UserDB::class.java, "userInfo")
             .build()
 
+    @Provides
+    fun providesSavedNewsDao(newsDB: SavedNewsDB) = newsDB.savedNewsDao()
+
+    @Provides
+    @Singleton
+    fun provideSavedNewsDB(@ApplicationContext context: Context) =
+        Room.databaseBuilder(context, SavedNewsDB::class.java, "savedNews").build()
 }
