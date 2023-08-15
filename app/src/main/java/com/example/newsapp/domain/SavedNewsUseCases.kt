@@ -24,3 +24,12 @@ class DeleteNewsUseCase @Inject constructor(
         newsRepository.deleteNews(url)
     }
 }
+
+class IsNewsSavedUseCase @Inject constructor(
+    private val newsRepository: NewsRepository,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+) {
+    suspend operator fun invoke(url: String): Boolean = withContext(ioDispatcher) {
+        newsRepository.getSavedNews(url) != null
+    }
+}
