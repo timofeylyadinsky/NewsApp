@@ -12,8 +12,8 @@ interface SavedNewsDao {
     fun getSavedNews(tUrl: String): SavedNewsDbo?
 
     @Insert
-    fun saveNews(news: SavedNewsDbo)
+    suspend fun saveNews(news: SavedNewsDbo)
 
     @Query("delete from savedNews where url = :tUrl")
-    fun deleteNews(tUrl: String)
+    suspend fun deleteNews(tUrl: String)
 }

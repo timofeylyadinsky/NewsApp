@@ -23,14 +23,15 @@ class DatabaseModule {
     @Provides
     @Singleton
     fun provideUserDB(@ApplicationContext context: Context) = Room
-            .databaseBuilder(context, UserDB::class.java, "userInfo")
-            .build()
+        .databaseBuilder(context, UserDB::class.java, "userInfo")
+        .build()
 
     @Provides
     fun providesSavedNewsDao(newsDB: SavedNewsDB) = newsDB.savedNewsDao()
 
     @Provides
     @Singleton
-    fun provideSavedNewsDB(@ApplicationContext context: Context) =
-        Room.databaseBuilder(context, SavedNewsDB::class.java, "savedNews").build()
+    fun provideSavedNewsDB(@ApplicationContext context: Context) = Room
+        .databaseBuilder(context, SavedNewsDB::class.java, "savedNews")
+        .build()
 }
