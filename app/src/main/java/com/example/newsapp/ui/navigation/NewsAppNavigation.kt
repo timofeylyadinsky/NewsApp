@@ -27,8 +27,8 @@ fun NewsAppNavigation() {
                 defaultValue = "google.com"
                 nullable = false
             })
-        ) {
-            entry -> entry.arguments?.getString("url")?.let { NewsDetailsScreen(url = it) }
+        ) { entry ->
+            entry.arguments?.getString("url")?.let { NewsDetailsScreen(url = it) }
         }
         composable(route = Screen.SavedNewsScreen.route) {
         }
