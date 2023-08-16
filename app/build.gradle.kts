@@ -69,6 +69,7 @@ dependencies {
     implementation(Deps.room)
     annotationProcessor(Deps.roomCompiler)
     kapt(Deps.roomCompiler)
+    implementation(Deps.roomKtx)
 
     //Hilt
     implementation(Deps.dagger)
