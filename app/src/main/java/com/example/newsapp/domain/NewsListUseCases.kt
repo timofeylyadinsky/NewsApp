@@ -6,6 +6,7 @@ import com.example.newsapp.data.repository.module.IoDispatcher
 import com.example.newsapp.domain.entity.Article
 import com.example.newsapp.domain.entity.NewsData
 import com.example.newsapp.domain.entity.toArticle
+import com.example.newsapp.domain.entity.toArticleDto
 import com.example.newsapp.domain.entity.toNews
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -38,5 +39,14 @@ class GetNewsFromDBUseCase @Inject constructor(
                 item.toArticle()
             }
         }
+    }
+}
+
+class InsertCachedArticlesUseCase @Inject constructor(
+    private val newsRepository: NewsRepository,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+) {
+    suspend operator fun invoke(articles: List<Article>) = withContext(ioDispatcher) {
+        newsRepository.insertNewArticlesToDB(articles.map { it.toArticleDto() })
     }
 }

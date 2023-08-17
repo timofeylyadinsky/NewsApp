@@ -38,7 +38,7 @@ fun ArticleDto.toArticle() = Article(
 
 fun SourceDto.toSource() = Source(name = name)
 
-fun Article.toArticleDto() = Article(
+fun Article.toArticleDto() = ArticleDto(
     source = source?.toSourceDto(),
     author = author,
     title = title,
@@ -48,4 +48,4 @@ fun Article.toArticleDto() = Article(
     publishedAt = publishedAt
 )
 
-fun Source.toSourceDto() = Source(name = name)
+fun Source.toSourceDto() = SourceDto(name = name)
