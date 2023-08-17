@@ -50,3 +50,12 @@ class InsertCachedArticlesUseCase @Inject constructor(
         newsRepository.insertNewArticlesToDB(articles.map { it.toArticleDto() })
     }
 }
+
+class DeleteNewsInDBUseCase @Inject constructor(
+    private val newsRepository: NewsRepository,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+) {
+    suspend operator fun invoke() = withContext(ioDispatcher) {
+        newsRepository.deleteAllArticles()
+    }
+}
