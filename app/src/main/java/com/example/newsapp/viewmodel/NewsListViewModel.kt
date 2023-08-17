@@ -25,22 +25,8 @@ class NewsListViewModel @Inject constructor(
     init {
         uiState.tryEmit(NewsListUIState.LOADING)
         getList()
+        fetchList()
     }
-
-//    private fun getList() = viewModelScope.launch {
-//        uiState.tryEmit(NewsListUIState.LOADING)
-//        try {
-//            val newsData = getNewsResponseUseCase()
-//            newsData.collect { data ->
-//                if (data.errorMessage.isNullOrEmpty()) uiState.value =
-//                    NewsListUIState.SUCCESS(data.news)
-//                else uiState.value =
-//                    NewsListUIState.ERROR(data.errorMessage)
-//            }
-//        } catch (e: Exception) {
-//            uiState.value = NewsListUIState.ERROR(e.localizedMessage)
-//        }
-//    }
 
     private fun getList() = viewModelScope.launch {
         getNewsFromDBUseCase().collect {
@@ -57,9 +43,12 @@ class NewsListViewModel @Inject constructor(
                     deleteNewsInDBUseCase()
                     uiState.value = NewsListUIState.LOADING
                     insertCachedArticlesUseCase(data.news)
+                } else {
+                    uiState.value = NewsListUIState.ERRORFetch(
+                        (uiState.value as NewsListUIState.SUCCESS).articles,
+                        data.errorMessage
+                    )
                 }
-                else uiState.value =
-                    NewsListUIState.ERROR(data.errorMessage)
             }
         } catch (e: Exception) {
             uiState.value = NewsListUIState.ERROR(e.localizedMessage)
