@@ -14,3 +14,13 @@ data class ArticleDbo(
     val urlToImage: String?,
     val publishedAt: String?
 )
+
+fun ArticleDbo.toArticleDto() = ArticleDto(
+    source = SourceDto(source),
+    author = author,
+    title = title,
+    description = description,
+    url = url,
+    urlToImage = urlToImage,
+    publishedAt = publishedAt
+)
