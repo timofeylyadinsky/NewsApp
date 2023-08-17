@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface NewsDao {
     @Query("delete from news")
-    fun deleteAllCachedNews()
+    suspend fun deleteAllCachedNews()
 
     @Insert
-    fun insertAllArticles(articlesDbo: List<ArticleDbo>)
+    suspend fun insertAllArticles(articlesDbo: List<ArticleDbo>)
 
     @Query("select * from news")
     fun getAllCachedArticles(): Flow<List<ArticleDbo>>
