@@ -49,5 +49,20 @@ class NewsListViewModel @Inject constructor(
         }
     }
 
-    private fun fetchList() = viewModelScope.launch {  }
+    private fun fetchList() = viewModelScope.launch {
+        try {
+            val newsData = getNewsResponseUseCase()
+            newsData.collect { data ->
+                if (data.errorMessage.isNullOrEmpty()) {
+                    deleteNewsInDBUseCase()
+                    uiState.value = NewsListUIState.LOADING
+                    insertCachedArticlesUseCase(data.news)
+                }
+                else uiState.value =
+                    NewsListUIState.ERROR(data.errorMessage)
+            }
+        } catch (e: Exception) {
+            uiState.value = NewsListUIState.ERROR(e.localizedMessage)
+        }
+    }
 }
