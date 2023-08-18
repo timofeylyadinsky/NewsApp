@@ -1,11 +1,12 @@
 package com.example.newsapp.data.entity
 
-data class NewsDto(
-    val articles: List<ArticleDto>
-)
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-data class ArticleDto(
-    val source: SourceDto?,
+@Entity(tableName = "news")
+data class ArticleDbo(
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val source: String?,
     val author: String?,
     val title: String?,
     val description: String?,
@@ -14,12 +15,8 @@ data class ArticleDto(
     val publishedAt: String?
 )
 
-data class SourceDto(
-    val name: String?
-)
-
-fun ArticleDto.toArticleDbo() = ArticleDbo(
-    source = source?.name,
+fun ArticleDbo.toArticleDto() = ArticleDto(
+    source = SourceDto(source),
     author = author,
     title = title,
     description = description,

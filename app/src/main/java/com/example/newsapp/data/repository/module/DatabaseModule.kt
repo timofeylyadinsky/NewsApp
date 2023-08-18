@@ -2,14 +2,13 @@ package com.example.newsapp.data.repository.module
 
 import android.content.Context
 import androidx.room.Room
-import com.example.newsapp.data.dao.UserDao
+import com.example.newsapp.data.db.NewsDB
 import com.example.newsapp.data.db.SavedNewsDB
 import com.example.newsapp.data.db.UserDB
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -34,4 +33,12 @@ class DatabaseModule {
     fun provideSavedNewsDB(@ApplicationContext context: Context) = Room
         .databaseBuilder(context, SavedNewsDB::class.java, "savedNews")
         .build()
+
+    @Provides
+    fun providesNewsDao(newsDB: NewsDB) = newsDB.newsDao()
+
+    @Provides
+    @Singleton
+    fun provideNewsDB(@ApplicationContext context: Context) =
+        Room.databaseBuilder(context, NewsDB::class.java, "news").build()
 }

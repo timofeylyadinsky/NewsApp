@@ -37,3 +37,15 @@ fun ArticleDto.toArticle() = Article(
 )
 
 fun SourceDto.toSource() = Source(name = name)
+
+fun Article.toArticleDto() = ArticleDto(
+    source = source?.toSourceDto(),
+    author = author,
+    title = title,
+    description = description,
+    url = url,
+    urlToImage = urlToImage,
+    publishedAt = publishedAt
+)
+
+fun Source.toSourceDto() = SourceDto(name = name)

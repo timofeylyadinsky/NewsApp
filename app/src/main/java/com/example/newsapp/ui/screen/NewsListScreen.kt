@@ -63,17 +63,39 @@ fun NewsListScreen(
             )
         }
 
+        is NewsListUIState.ERRORFetch -> {
+            val articles = (state as NewsListUIState.ERRORFetch).articles
+            val errorMessage = (state as NewsListUIState.ERRORFetch).message
+            Column {
+                Text(
+                    text = errorMessage,
+                    style = TextStyle(
+                        fontSize = 24.sp,
+                        color = MaterialTheme.colorScheme.error
+                    )
+                )
+                NewsListColumn(articles = articles, navController = navController)
+            }
+        }
+
         is NewsListUIState.SUCCESS -> {
             val articles = (state as NewsListUIState.SUCCESS).articles
-            Column(modifier = Modifier.verticalScroll(state = rememberScrollState())) {
-                articles.forEach {
-                    NewsItem(article = it, navController = navController)
-                }
-            }
+            NewsListColumn(articles = articles, navController = navController)
         }
     }
 }
 
+@Composable
+fun NewsListColumn(
+    articles: List<Article>,
+    navController: NavController
+) {
+    Column(modifier = Modifier.verticalScroll(state = rememberScrollState())) {
+        articles.forEach {
+            NewsItem(article = it, navController = navController)
+        }
+    }
+}
 
 @Composable
 fun NewsItem(
