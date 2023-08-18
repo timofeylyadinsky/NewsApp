@@ -39,4 +39,13 @@ object Deps {
     val landscapistGlide by lazy {"com.github.skydoves:landscapist-glide:${Versions.landscapistGlide}"}
 
     val navigation by lazy { "androidx.navigation:navigation-compose:${Versions.navigation}" }
+
+    //TEst
+    val testCore by lazy {"androidx.test:core:${Versions.testCore}"}
+    val archCore by lazy {"androidx.arch.core:core-testing:${Versions.archCore}"}
+    val coroutinesTest by lazy {"org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutinesTest}"}
+    val truth by lazy {"com.google.truth:truth:${Versions.truth}"}
+    val mockwebserver by lazy { "com.squareup.okhttp3:mockwebserver:${Versions.mockwebserver}" }
+    val mockk by lazy {"io.mockk:mockk:${Versions.mock}"}
+    val uiTestManifest by lazy {"androidx.compose.ui:ui-test-manifest:${Versions.testCore}"}
 }
