@@ -103,6 +103,19 @@ dependencies {
     testImplementation(Deps.mockk)
     debugImplementation(Deps.uiTestManifest)
 
+
+    androidTestImplementation(Deps.hiltTesting)
+    kaptAndroidTest(Deps.hiltCompiler)
+    androidTestImplementation(Deps.junit)
+    androidTestImplementation(Deps.coroutinesTest)
+    androidTestImplementation(Deps.truth)
+    androidTestImplementation(Deps.archCore)
+    androidTestImplementation(Deps.testCoreKtx)
+    androidTestImplementation(Deps.mockwebserver)
+    androidTestImplementation(Deps.mockwebserver)
+    androidTestImplementation(Deps.testRunner)
+
+
     //androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     //debugImplementation("androidx.compose.ui:ui-tooling")
     //debugImplementation("androidx.compose.ui:ui-test-manifest")

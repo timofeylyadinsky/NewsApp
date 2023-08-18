@@ -48,4 +48,7 @@ object Deps {
     val mockwebserver by lazy { "com.squareup.okhttp3:mockwebserver:${Versions.mockwebserver}" }
     val mockk by lazy {"io.mockk:mockk:${Versions.mock}"}
     val uiTestManifest by lazy {"androidx.compose.ui:ui-test-manifest:${Versions.testCore}"}
+    val hiltTesting by lazy {"com.google.dagger:hilt-android-testing:${Versions.dagger}"}
+    val testCoreKtx by lazy {"androidx.test:core-ktx:${Versions.testCore}"}
+    val testRunner by lazy {"androidx.test:runner:1.5.2"}
 }
