@@ -1,6 +1,5 @@
 package com.example.newsapp
 
-import androidx.core.view.ViewCompat.NestedScrollType
 import com.example.newsapp.data.dao.UserDao
 import com.example.newsapp.data.entity.User
 import com.example.newsapp.data.repository.UserRepository
