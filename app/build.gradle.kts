@@ -102,6 +102,7 @@ dependencies {
     testImplementation(Deps.mockwebserver)
     testImplementation(Deps.mockk)
     debugImplementation(Deps.uiTestManifest)
+    testImplementation(Deps.hiltTesting)
 
 
     androidTestImplementation(Deps.hiltTesting)
