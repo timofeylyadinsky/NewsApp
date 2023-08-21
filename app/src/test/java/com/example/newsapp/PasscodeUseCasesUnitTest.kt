@@ -13,6 +13,7 @@ import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.runTest
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
@@ -90,4 +91,7 @@ class PasscodeUseCasesUnitTest {
             assertThat(isPasscodeSkipUseCase()).isTrue()
         }
     }
+
+    @After
+    fun tearDown(){}
 }
