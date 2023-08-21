@@ -23,6 +23,7 @@ import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -126,6 +127,23 @@ class NewsListViewModelUnitTest {
     fun `test loading message`() {
         runTest {
             assertThat(newsListViewModel.uiState.value).isEqualTo(NewsListUIState.LOADING)
+        }
+    }
+
+    @Test
+    fun `test different message in view model`() {
+        runTest {
+            val job = launch {
+                newsListViewModel.uiState.collect {}
+            }
+            assertThat(newsListViewModel.uiState.value).isEqualTo(NewsListUIState.LOADING)
+            assertThat(newsListViewModel.uiState.value).isEqualTo(
+                NewsListUIState.SUCCESS(
+                    expectedArticleList
+                )
+            )
+            job.cancel()
+
         }
     }
 
