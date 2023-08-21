@@ -9,6 +9,7 @@ import com.example.newsapp.domain.IsPasscodeSkipUseCase
 import com.example.newsapp.domain.SavePasscodeUseCase
 import com.example.newsapp.domain.SkipPasscodeUseCase
 import com.example.newsapp.viewmodel.PasscodeViewModel
+import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
@@ -16,8 +17,6 @@ import kotlinx.coroutines.Dispatchers
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.test.runTest
 
 class PasscodeViewModelUnitTest {
     @MockK

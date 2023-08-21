@@ -9,9 +9,9 @@ import com.example.newsapp.domain.entity.Article
 import com.example.newsapp.domain.entity.Source
 import com.example.newsapp.domain.entity.toArticle
 import com.example.newsapp.domain.entity.toArticleDto
-import org.junit.Test
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
+import org.junit.Test
 
 class EntityMappingTest {
 
