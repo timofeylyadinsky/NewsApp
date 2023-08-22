@@ -114,7 +114,7 @@ class NewsListViewModelUnitTest {
         runTest {
             coEvery {
                 newsDao.getAllCachedArticles()
-            } returns flow { emit(actualArticleDboList) }
+            } returns flow { actualArticleDboList }
             newsListViewModel = NewsListViewModel(
                 getNewsFromDBUseCase = getNewsFromDBUseCase,
                 getNewsResponseUseCase = getNewsResponseUseCase,
@@ -139,8 +139,10 @@ class NewsListViewModelUnitTest {
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @After
     fun tearDown() {
+        Dispatchers.resetMain()
     }
 }
 
