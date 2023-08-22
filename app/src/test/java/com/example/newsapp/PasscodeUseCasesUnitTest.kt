@@ -52,35 +52,35 @@ class PasscodeUseCasesUnitTest {
     }
 
     @Test
-    fun `test passcode not required`() {
+    fun `Given user When start app Then receive not empty user info`() {
         runTest {
             assertThat(isPasscodeRequiredUseCase()).isFalse()
         }
     }
 
     @Test
-    fun `test when passcode not skip use case`() {
+    fun `Given locked user When passcode not skip use case Then receive message is locked`() {
         runTest {
             assertThat(isPasscodeSkipUseCase()).isFalse()
         }
     }
 
     @Test
-    fun `test when passcode not correct`() {
+    fun `Given locked user When send not correct passcode Then return passcode incorrect`() {
         runTest {
             assertThat(isPasscodeCorrectUseCase("")).isFalse()
         }
     }
 
     @Test
-    fun `test when passcode correct`() {
+    fun `Given locked user When send correct passcode Then return passcode correct`() {
         runTest {
             assertThat(isPasscodeCorrectUseCase("1111")).isTrue()
         }
     }
 
     @Test
-    fun `test passcode required`() {
+    fun `Given null user When check for existing Then return passcode required`() {
         runTest {
             coEvery {
                 userDao.getUser()
@@ -90,7 +90,7 @@ class PasscodeUseCasesUnitTest {
     }
 
     @Test
-    fun `test passcode skip`() {
+    fun `Given user not locked When check skipping passcode Return user not locked`() {
         runTest {
             coEvery {
                 userDao.getUser()
@@ -100,7 +100,7 @@ class PasscodeUseCasesUnitTest {
     }
 
     @Test
-    fun `test user save`() {
+    fun `Given user entity with passcode When save it Then receive similar user entity with passcode`() {
         runTest {
             val user = User(isLocked = true, passcode = "1234")
             var savedUser = ""
@@ -113,13 +113,13 @@ class PasscodeUseCasesUnitTest {
     }
 
     @Test
-    fun `test user skip passcode`(){
+    fun `Given user entity without passcode When save it Then receive similar user entity without passcode`() {
         runTest {
             val user = User(isLocked = false, passcode = "")
             var savedUser = ""
             coEvery {
                 userDao.saveUser(user)
-            } answers {savedUser = user.toString()}
+            } answers { savedUser = user.toString() }
             skipPasscodeUseCase()
             assertThat(savedUser).isEqualTo(user.toString())
         }

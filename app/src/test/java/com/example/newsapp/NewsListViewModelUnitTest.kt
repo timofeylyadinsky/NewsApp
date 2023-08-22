@@ -1,7 +1,6 @@
 package com.example.newsapp
 
 import com.example.newsapp.data.api.ApiService
-import com.example.newsapp.data.api.NetworkResult
 import com.example.newsapp.data.dao.NewsDao
 import com.example.newsapp.data.dao.SavedNewsDao
 import com.example.newsapp.data.entity.ArticleDbo
@@ -87,9 +86,6 @@ class NewsListViewModelUnitTest {
         )
     )
 
-    private val actualNetworkResult = NetworkResult.Success(actualArticleDtoList)
-    private val expectedNetworkResult = NetworkResult.Success(expectedArticleList)
-
     private lateinit var newsListViewModel: NewsListViewModel
     private lateinit var getNewsResponseUseCase: GetNewsResponseUseCase
     private lateinit var insertCachedArticlesUseCase: InsertCachedArticlesUseCase
@@ -111,12 +107,6 @@ class NewsListViewModelUnitTest {
         getNewsResponseUseCase = GetNewsResponseUseCase(newsRepo, Dispatchers.IO)
         deleteNewsInDBUseCase = DeleteNewsInDBUseCase(newsRepo, Dispatchers.IO)
         insertCachedArticlesUseCase = InsertCachedArticlesUseCase(newsRepo, Dispatchers.IO)
-        newsListViewModel = NewsListViewModel(
-            getNewsFromDBUseCase = getNewsFromDBUseCase,
-            getNewsResponseUseCase = getNewsResponseUseCase,
-            deleteNewsInDBUseCase = deleteNewsInDBUseCase,
-            insertCachedArticlesUseCase = insertCachedArticlesUseCase
-        )
         coEvery {
             newsDao.getAllCachedArticles()
         } returns flow { emit(actualArticleDboList) }
@@ -124,18 +114,31 @@ class NewsListViewModelUnitTest {
     }
 
     @Test
-    fun `test loading message`() {
+    fun `test receiving start loading message`() {
         runTest {
+            newsListViewModel = NewsListViewModel(
+                getNewsFromDBUseCase = getNewsFromDBUseCase,
+                getNewsResponseUseCase = getNewsResponseUseCase,
+                deleteNewsInDBUseCase = deleteNewsInDBUseCase,
+                insertCachedArticlesUseCase = insertCachedArticlesUseCase
+            )
             assertThat(newsListViewModel.uiState.value).isEqualTo(NewsListUIState.LOADING)
         }
     }
 
     @Test
-    fun `test different message in view model`() {
+    fun `Given view model and job When start job Then get loading and success message`() {
         runTest {
+            newsListViewModel = NewsListViewModel(
+                getNewsFromDBUseCase = getNewsFromDBUseCase,
+                getNewsResponseUseCase = getNewsResponseUseCase,
+                deleteNewsInDBUseCase = deleteNewsInDBUseCase,
+                insertCachedArticlesUseCase = insertCachedArticlesUseCase
+            )
             val job = launch {
                 newsListViewModel.uiState.collect {}
             }
+
             assertThat(newsListViewModel.uiState.value).isEqualTo(NewsListUIState.LOADING)
             assertThat(newsListViewModel.uiState.value).isEqualTo(
                 NewsListUIState.SUCCESS(

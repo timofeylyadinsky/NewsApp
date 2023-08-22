@@ -1,7 +1,6 @@
 package com.example.newsapp
 
 import com.example.newsapp.data.api.ApiService
-import com.example.newsapp.data.api.NetworkResult
 import com.example.newsapp.data.dao.NewsDao
 import com.example.newsapp.data.dao.SavedNewsDao
 import com.example.newsapp.data.entity.ArticleDbo
@@ -73,9 +72,6 @@ class NewsListUseCaseUnitTest {
         )
     )
 
-    private val actualNetworkResult = NetworkResult.Success(actualArticleDtoList)
-    private val expectedNetworkResult = NetworkResult.Success(expectedArticleList)
-
     @Before
     fun setup() {
         savedNewsDao = mockk()
@@ -83,16 +79,19 @@ class NewsListUseCaseUnitTest {
         apiService = mockk()
         newsRepo =
             NewsRepository(savedNewsDao = savedNewsDao, newsDao = newsDao, apiService = apiService)
-        getNewsFromDBUseCase = GetNewsFromDBUseCase(newsRepo, Dispatchers.IO)
-        coEvery {
-            newsDao.getAllCachedArticles()
-        } returns flow { emit(actualArticleDboList) }
+
 
     }
 
     @Test
-    fun `test get cached article`() {
+    fun `Given use case class return from db When use case is calling Then articles returned`() {
         runTest {
+            //Given use case class
+            getNewsFromDBUseCase = GetNewsFromDBUseCase(newsRepo, Dispatchers.IO)
+            coEvery {
+                newsDao.getAllCachedArticles()
+            } returns flow { emit(actualArticleDboList) }
+            //Then received articles
             assertThat(getNewsFromDBUseCase().first()).isEqualTo(expectedArticleList)
         }
     }

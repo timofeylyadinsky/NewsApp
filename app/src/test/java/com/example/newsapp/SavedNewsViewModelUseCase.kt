@@ -67,7 +67,7 @@ class SavedNewsViewModelUseCase {
     }
 
     @Test
-    fun `test state of saved news`() {
+    fun `Given saved news When check state Then receive that news`() {
         runTest {
             savedNewsViewModel.changeUrl(validTestUrl)
             assertThat(savedNewsViewModel.uiState.url).isEqualTo(validTestUrl)

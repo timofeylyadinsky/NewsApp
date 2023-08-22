@@ -48,7 +48,7 @@ class SavedNewsUseCaseUnitTest {
     }
 
     @Test
-    fun `test not valid url to take news`() {
+    fun `Given not valid url When check Then receive news not saved`() {
         runTest {
             coEvery {
                 savedNewsDao.getSavedNews(notValidTestUrl)
@@ -58,7 +58,7 @@ class SavedNewsUseCaseUnitTest {
     }
 
     @Test
-    fun `test valid url to take news`() {
+    fun `Given valid url When check Received true news`() {
         runTest {
             assertThat(isNewsSavedUseCase(validTestUrl)).isTrue()
         }

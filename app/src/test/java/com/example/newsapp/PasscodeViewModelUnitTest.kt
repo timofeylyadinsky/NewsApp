@@ -63,39 +63,39 @@ class PasscodeViewModelUnitTest {
     }
 
     @Test
-    fun `test 1 changing passcode in ui state`() {
+    fun `test 1 Given passcode When changing Then ui state has it`() {
         passcodeViewModel.changePasscodeValue("1111")
         assertThat(passcodeViewModel.uiState.passcode).isEqualTo("1111")
     }
 
     @Test
-    fun `test 2 changing passcode in ui state`() {
+    fun `test 2 Given passcode When changing Then ui state has it`() {
         passcodeViewModel.changePasscodeValue("1234")
         assertThat(passcodeViewModel.uiState.passcode).isEqualTo("1234")
     }
 
     @Test
-    fun `test passcode change when add more than 4 num`() {
+    fun `Given passcode When passcode change num with 5 digits Then ui state not change`() {
         passcodeViewModel.uiState.passcode = "1234"
         passcodeViewModel.changePasscodeValue("12345")
         assertThat(passcodeViewModel.uiState.passcode).isEqualTo("1234")
     }
 
     @Test
-    fun `test submit without 4 num in passcode`() {
+    fun `Given passcode without 4 digit When submit Then received message error not 4 digit`() {
         passcodeViewModel.clickSubmitButton()
         assertThat(passcodeViewModel.uiState.errorMessage).isEqualTo(2131492923)
     }
 
     @Test
-    fun `test submit not correct passcode`() {
+    fun `Given incorrect passcode When Submit Then received incorrect message`() {
         passcodeViewModel.uiState.passcode = "1111"
         passcodeViewModel.clickSubmitButton()
         assertThat(passcodeViewModel.uiState.errorMessage).isEqualTo(2131492920)
     }
 
     @Test
-    fun `test submit correct passcode`() {
+    fun `Given correct passcode When Submit Then received correct message`() {
         passcodeViewModel.uiState.passcode = "1234"
         passcodeViewModel.clickSubmitButton()
         assertThat(passcodeViewModel.uiState.errorMessage).isEqualTo(2131492880)

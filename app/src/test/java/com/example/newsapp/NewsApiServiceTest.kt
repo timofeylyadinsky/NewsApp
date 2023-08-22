@@ -29,7 +29,7 @@ class NewsApiServiceTest {
     }
 
     @Test
-    fun `test response received`() {
+    fun `Given json When response and request Then body of response and request path `() {
         runTest {
             enqueueMockResponse("news.json")
 
@@ -43,7 +43,7 @@ class NewsApiServiceTest {
     }
 
     @Test
-    fun `test articles received`() {
+    fun `Given json When response body takes Then body articles check 2 object and name of 1`() {
         runTest {
             enqueueMockResponse("news.json")
 
