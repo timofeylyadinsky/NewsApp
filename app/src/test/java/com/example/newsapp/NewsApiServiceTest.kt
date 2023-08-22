@@ -1,6 +1,7 @@
 package com.example.newsapp
 
 import com.example.newsapp.data.api.ApiService
+import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.runTest
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -28,13 +29,30 @@ class NewsApiServiceTest {
     }
 
     @Test
-    fun `test empty list response`() {
+    fun `test response received`() {
         runTest {
             enqueueMockResponse("news.json")
 
             val response = apiService.getNews().body()
+            val request = mockWebServer.takeRequest()
 
-            println(response)
+            assertThat(response).isNotNull()
+            assertThat(request.path).isEqualTo("/v2/top-headlines?country=us")
+
+        }
+    }
+
+    @Test
+    fun `test articles received`() {
+        runTest {
+            enqueueMockResponse("news.json")
+
+            val response = apiService.getNews().body()
+            val articles = response?.articles
+            val firstArticle = articles?.get(0)
+
+            assertThat(articles?.size).isEqualTo(2)
+            assertThat(firstArticle?.source?.name).isEqualTo("Business Insider")
 
         }
     }
