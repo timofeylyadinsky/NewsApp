@@ -6,6 +6,8 @@ import com.example.newsapp.data.repository.UserRepository
 import com.example.newsapp.domain.IsPasscodeCorrectUseCase
 import com.example.newsapp.domain.IsPasscodeRequiredUseCase
 import com.example.newsapp.domain.IsPasscodeSkipUseCase
+import com.example.newsapp.domain.SavePasscodeUseCase
+import com.example.newsapp.domain.SkipPasscodeUseCase
 import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
@@ -29,6 +31,10 @@ class PasscodeUseCasesUnitTest {
 
     private lateinit var isPasscodeCorrectUseCase: IsPasscodeCorrectUseCase
 
+    private lateinit var savePasscodeUseCase: SavePasscodeUseCase
+
+    private lateinit var skipPasscodeUseCase: SkipPasscodeUseCase
+
     private val ioDispatcher = Dispatchers.IO
 
     @Before
@@ -38,6 +44,8 @@ class PasscodeUseCasesUnitTest {
         isPasscodeRequiredUseCase = IsPasscodeRequiredUseCase(userRepo, ioDispatcher)
         isPasscodeSkipUseCase = IsPasscodeSkipUseCase(userRepo, ioDispatcher)
         isPasscodeCorrectUseCase = IsPasscodeCorrectUseCase(userRepo, ioDispatcher)
+        savePasscodeUseCase = SavePasscodeUseCase(userRepo, ioDispatcher)
+        skipPasscodeUseCase = SkipPasscodeUseCase(userRepo, ioDispatcher)
         coEvery {
             userDao.getUser()
         } returns User(1, true, "1111")
@@ -91,6 +99,33 @@ class PasscodeUseCasesUnitTest {
         }
     }
 
+    @Test
+    fun `test user save`() {
+        runTest {
+            val user = User(isLocked = true, passcode = "1234")
+            var savedUser = ""
+            coEvery {
+                userDao.saveUser(user)
+            } answers { savedUser = user.toString() }
+            savePasscodeUseCase("1234")
+            assertThat(savedUser).isEqualTo(user.toString())
+        }
+    }
+
+    @Test
+    fun `test user skip passcode`(){
+        runTest {
+            val user = User(isLocked = false, passcode = "")
+            var savedUser = ""
+            coEvery {
+                userDao.saveUser(user)
+            } answers {savedUser = user.toString()}
+            skipPasscodeUseCase()
+            assertThat(savedUser).isEqualTo(user.toString())
+        }
+    }
+
     @After
-    fun tearDown(){}
+    fun tearDown() {
+    }
 }
