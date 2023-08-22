@@ -111,10 +111,10 @@ class NewsListViewModelUnitTest {
 
     @Test
     fun `Given view model and job When start job Then get loading and success message`() {
-        coEvery {
-            newsDao.getAllCachedArticles()
-        } returns flow { emit(actualArticleDboList) }
         runTest {
+            coEvery {
+                newsDao.getAllCachedArticles()
+            } returns flow { emit(actualArticleDboList) }
             newsListViewModel = NewsListViewModel(
                 getNewsFromDBUseCase = getNewsFromDBUseCase,
                 getNewsResponseUseCase = getNewsResponseUseCase,
