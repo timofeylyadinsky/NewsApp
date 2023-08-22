@@ -4,8 +4,6 @@ import com.example.newsapp.data.api.ApiService
 import com.example.newsapp.data.dao.NewsDao
 import com.example.newsapp.data.dao.SavedNewsDao
 import com.example.newsapp.data.entity.ArticleDbo
-import com.example.newsapp.data.entity.ArticleDto
-import com.example.newsapp.data.entity.SourceDto
 import com.example.newsapp.data.repository.NewsRepository
 import com.example.newsapp.domain.DeleteNewsInDBUseCase
 import com.example.newsapp.domain.GetNewsFromDBUseCase
@@ -74,18 +72,6 @@ class NewsListViewModelUnitTest {
         )
     )
 
-    private val actualArticleDtoList = listOf(
-        ArticleDto(
-            source = SourceDto(name = "CNN"),
-            author = "John John",
-            title = "Tesla Sued Over Fatal Car Crash",
-            description = "Tesla Sued Over Fatal Car Crash",
-            url = "https://google.com",
-            urlToImage = null,
-            publishedAt = "2023-23-23"
-        )
-    )
-
     private lateinit var newsListViewModel: NewsListViewModel
     private lateinit var getNewsResponseUseCase: GetNewsResponseUseCase
     private lateinit var insertCachedArticlesUseCase: InsertCachedArticlesUseCase
@@ -107,9 +93,6 @@ class NewsListViewModelUnitTest {
         getNewsResponseUseCase = GetNewsResponseUseCase(newsRepo, Dispatchers.IO)
         deleteNewsInDBUseCase = DeleteNewsInDBUseCase(newsRepo, Dispatchers.IO)
         insertCachedArticlesUseCase = InsertCachedArticlesUseCase(newsRepo, Dispatchers.IO)
-        coEvery {
-            newsDao.getAllCachedArticles()
-        } returns flow { emit(actualArticleDboList) }
         Dispatchers.setMain(UnconfinedTestDispatcher())
     }
 
@@ -128,6 +111,9 @@ class NewsListViewModelUnitTest {
 
     @Test
     fun `Given view model and job When start job Then get loading and success message`() {
+        coEvery {
+            newsDao.getAllCachedArticles()
+        } returns flow { emit(actualArticleDboList) }
         runTest {
             newsListViewModel = NewsListViewModel(
                 getNewsFromDBUseCase = getNewsFromDBUseCase,
@@ -135,10 +121,13 @@ class NewsListViewModelUnitTest {
                 deleteNewsInDBUseCase = deleteNewsInDBUseCase,
                 insertCachedArticlesUseCase = insertCachedArticlesUseCase
             )
+
+            //When launch state
             val job = launch {
                 newsListViewModel.uiState.collect {}
             }
 
+            //Then receive messages
             assertThat(newsListViewModel.uiState.value).isEqualTo(NewsListUIState.LOADING)
             assertThat(newsListViewModel.uiState.value).isEqualTo(
                 NewsListUIState.SUCCESS(

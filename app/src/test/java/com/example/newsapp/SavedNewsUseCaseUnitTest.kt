@@ -42,9 +42,7 @@ class SavedNewsUseCaseUnitTest {
         newsRepo =
             NewsRepository(savedNewsDao = savedNewsDao, newsDao = newsDao, apiService = apiService)
         isNewsSavedUseCase = IsNewsSavedUseCase(newsRepo, Dispatchers.IO)
-        coEvery {
-            savedNewsDao.getSavedNews(validTestUrl)
-        } returns SavedNewsDbo(id = 1, url = validTestUrl)
+
     }
 
     @Test
@@ -53,6 +51,7 @@ class SavedNewsUseCaseUnitTest {
             coEvery {
                 savedNewsDao.getSavedNews(notValidTestUrl)
             } returns null
+
             assertThat(isNewsSavedUseCase(notValidTestUrl)).isFalse()
         }
     }
@@ -60,6 +59,10 @@ class SavedNewsUseCaseUnitTest {
     @Test
     fun `Given valid url When check Received true news`() {
         runTest {
+            coEvery {
+                savedNewsDao.getSavedNews(validTestUrl)
+            } returns SavedNewsDbo(id = 1, url = validTestUrl)
+
             assertThat(isNewsSavedUseCase(validTestUrl)).isTrue()
         }
     }

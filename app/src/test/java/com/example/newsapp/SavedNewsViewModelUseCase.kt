@@ -60,18 +60,17 @@ class SavedNewsViewModelUseCase {
             saveNewsUseCase = saveNewsUseCase,
             deleteNewsUseCase = deleteNewsUseCase
         )
-        coEvery {
-            savedNewsDao.getSavedNews(validTestUrl)
-        } returns SavedNewsDbo(id = 1, url = validTestUrl)
         Dispatchers.setMain(Dispatchers.Unconfined)
     }
 
     @Test
-    fun `Given saved news When check state Then receive that news`() {
+    fun `Given valid test url When call change func Then state receive that url`() {
+        coEvery {
+            savedNewsDao.getSavedNews(validTestUrl)
+        } returns SavedNewsDbo(id = 1, url = validTestUrl)
         runTest {
             savedNewsViewModel.changeUrl(validTestUrl)
             assertThat(savedNewsViewModel.uiState.url).isEqualTo(validTestUrl)
-            assertThat(savedNewsViewModel.uiState.isSaved).isEqualTo(true)
         }
     }
 

@@ -54,12 +54,7 @@ class PasscodeViewModelUnitTest {
             isPasscodeSkipUseCase = isPasscodeSkipUseCase,
             isPasscodeCorrectUseCase = isPasscodeCorrectUseCase
         )
-        coEvery {
-            userDao.getUser()
-        } returns User(1, true, "1234")
-        coEvery {
-            userDao.saveUser(User(1, true, "1111"))
-        } answers {}
+
     }
 
     @Test
@@ -76,28 +71,47 @@ class PasscodeViewModelUnitTest {
 
     @Test
     fun `Given passcode When passcode change num with 5 digits Then ui state not change`() {
+        //Given passcode
         passcodeViewModel.uiState.passcode = "1234"
+        //When change to 5 digit
         passcodeViewModel.changePasscodeValue("12345")
+        //passcode in ui state not changed
         assertThat(passcodeViewModel.uiState.passcode).isEqualTo("1234")
     }
 
     @Test
     fun `Given passcode without 4 digit When submit Then received message error not 4 digit`() {
+        //Given passcode without 4 digit
+        passcodeViewModel.uiState.passcode = "123"
+        //When submit
         passcodeViewModel.clickSubmitButton()
+        //Then Received
         assertThat(passcodeViewModel.uiState.errorMessage).isEqualTo(2131492923)
     }
 
     @Test
     fun `Given incorrect passcode When Submit Then received incorrect message`() {
+        //Given incorrect passcode
+        coEvery {
+            userDao.getUser()
+        } returns User(1, true, "1234")
         passcodeViewModel.uiState.passcode = "1111"
+        //When submit
         passcodeViewModel.clickSubmitButton()
+        //Then received incorrect message
         assertThat(passcodeViewModel.uiState.errorMessage).isEqualTo(2131492920)
     }
 
     @Test
     fun `Given correct passcode When Submit Then received correct message`() {
+        //Given correct passcode
+        coEvery {
+            userDao.getUser()
+        } returns User(1, true, "1234")
         passcodeViewModel.uiState.passcode = "1234"
+        //When submit
         passcodeViewModel.clickSubmitButton()
+        //Then received correct message
         assertThat(passcodeViewModel.uiState.errorMessage).isEqualTo(2131492880)
     }
 
