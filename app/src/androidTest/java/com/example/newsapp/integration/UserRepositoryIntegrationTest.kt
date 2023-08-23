@@ -53,6 +53,18 @@ class UserRepositoryIntegrationTest {
         }
     }
 
+    @Test
+    fun givenUserWhenSaveInDbThenGetThatUser() {
+        runTest {
+            val expectedUser = User(isLocked = true, passcode = "1111")
+
+            userRepository.saveUser(expectedUser)
+            val actualUser = userDao.getUser()
+
+            assertThat(actualUser).isEqualTo(expectedUser)
+        }
+    }
+
 
     @After
     fun tearDown() {
