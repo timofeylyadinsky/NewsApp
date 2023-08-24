@@ -68,10 +68,24 @@ class UserViewModelIntegrationTest {
         )
     }
     @Test
-    fun test() {
+    fun givenPasscodeWhenChangeItThenStateHasIt() {
         runTest {
+            val testPasscode = "1234"
+            passcodeViewModel.changePasscodeValue(testPasscode)
 
-            assertThat("").isNull()
+            val actualPasscode = passcodeViewModel.uiState.passcode
+            assertThat(actualPasscode).isEqualTo(testPasscode)
+        }
+    }
+
+    @Test
+    fun givenPasscodeWithMoreThan4DigitsWhenChangeItThenStateHasNotIt() {
+        runTest {
+            val incorrectPasscode = "123456"
+            passcodeViewModel.changePasscodeValue(incorrectPasscode)
+
+            val actualPasscode = passcodeViewModel.uiState.passcode
+            assertThat(actualPasscode).isNotEqualTo(incorrectPasscode)
         }
     }
 
