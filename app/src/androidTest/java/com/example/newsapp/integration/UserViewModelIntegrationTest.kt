@@ -1,6 +1,7 @@
 package com.example.newsapp.integration
 
 import android.content.Context
+import androidx.compose.ui.res.stringResource
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.example.newsapp.data.dao.UserDao
@@ -67,6 +68,7 @@ class UserViewModelIntegrationTest {
             isPasscodeCorrectUseCase = isPasscodeCorrectUseCase
         )
     }
+
     @Test
     fun givenPasscodeWhenChangeItThenStateHasIt() {
         runTest {
@@ -89,6 +91,15 @@ class UserViewModelIntegrationTest {
         }
     }
 
+    @Test
+    fun givenNoPasscodeWhenClickButtonThenReturnMessageHasNo4Digits() {
+        runTest {
+            passcodeViewModel.clickSubmitButton()
+
+            val errorMessageCode = passcodeViewModel.uiState.errorMessage
+            assertThat(errorMessageCode).isEqualTo(2131492923)
+        }
+    }
 
     @After
     fun tearDown() {
