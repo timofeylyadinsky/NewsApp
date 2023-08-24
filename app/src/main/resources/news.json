@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "totalResults": 7721,
+  "articles": [
+  {
+      "source": {
+      "id": "business-insider",
+      "name": "Business Insider"
+    },
+    "author": "Sarah Jackson",
+    "title": "Elon Musk seemed to have 'bought what Putin was selling, hook, line, and sinker,' fellow PayPal mafia member says",
+    "description": "LinkedIn cofounder Reid Hoffman's comments come after SpaceX provided Starlink internet to Ukraine days after the Russian invasion.",
+    "url": "https://www.businessinsider.com/elon-musk-bought-what-putin-selling-ukraine-starlink-reid-hoffman-report-2023-8",
+    "urlToImage": "https://i.insider.com/642d729a2a659a0019a67b02?width=1200&format=jpeg",
+    "publishedAt": "2023-08-21T19:47:29Z",
+    "content": "Reid Hoffman (left) said Elon Musk, a fellow member of the\"PayPal Mafia\" said Musk bought into the Vladimir Putin's take on the war in Ukraine.Noah Berger and Hannibal Hanschk via Associated Press\r\n<… [+4076 chars]"
+  },
+  {
+      "source": {
+      "id": null,
+      "name": "Biztoc.com"
+    },
+    "author": "investors.com",
+    "title": "S&P 500: Two Megacaps Among Monday's Big Winners",
+    "description": ", Nvidia (NVDA), Tesla (TSLA) and Broadcom (AVGO) were the top five S&P 500 index gainers on the stock market today. The S&P 500 rose 0.7% Monday afternoon even as the 10-year Treasury yield jumped to a 15-year high, though market breadth was not impressive. …",
+    "url": "https://biztoc.com/x/fdb423c65247ad38",
+    "urlToImage": "https://c.biztoc.com/p/fdb423c65247ad38/s.webp",
+    "publishedAt": "2023-08-21T19:44:05Z",
+    "content": ", Moderna (MRNA), Nvidia (NVDA), Tesla (TSLA) and Broadcom (AVGO) were the top five S&amp;P 500 index gainers on the stock market today.The S&amp;P 500 rose 0.7% Monday afternoon even as the 10-year … [+289 chars]"
+  }
+  ]
+}

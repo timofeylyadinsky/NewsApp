@@ -15,4 +15,10 @@ object Versions {
     const val glide = "4.15.1"
     const val landscapistGlide = "2.2.3"
     const val navigation = "2.6.0"
+    const val testCore = "1.5.0"
+    const val archCore = "2.2.0"
+    const val coroutinesTest = "1.7.1"
+    const val truth = "1.1.3"
+    const val mockwebserver = "4.9.1"
+    const val mock = "1.10.5"
 }

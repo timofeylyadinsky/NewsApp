@@ -95,8 +95,29 @@ dependencies {
     androidTestImplementation(platform(Deps.composeBom))
     androidTestImplementation(Deps.junitExt)
 
+    testImplementation(Deps.testCore)
+    testImplementation(Deps.archCore)
+    testImplementation(Deps.coroutinesTest)
+    testImplementation(Deps.truth)
+    testImplementation(Deps.mockwebserver)
+    testImplementation(Deps.mockk)
+    debugImplementation(Deps.uiTestManifest)
+    testImplementation(Deps.hiltTesting)
 
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    androidTestImplementation(Deps.hiltTesting)
+    kaptAndroidTest(Deps.hiltCompiler)
+    androidTestImplementation(Deps.junit)
+    androidTestImplementation(Deps.coroutinesTest)
+    androidTestImplementation(Deps.truth)
+    androidTestImplementation(Deps.archCore)
+    androidTestImplementation(Deps.testCoreKtx)
+    androidTestImplementation(Deps.mockwebserver)
+    androidTestImplementation(Deps.mockwebserver)
+    androidTestImplementation(Deps.testRunner)
+
+
+    //androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    //debugImplementation("androidx.compose.ui:ui-tooling")
+    //debugImplementation("androidx.compose.ui:ui-test-manifest")
 }
