@@ -116,8 +116,8 @@ dependencies {
     androidTestImplementation(Deps.mockwebserver)
     androidTestImplementation(Deps.testRunner)
 
-
-    //androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    //debugImplementation("androidx.compose.ui:ui-tooling")
-    //debugImplementation("androidx.compose.ui:ui-test-manifest")
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.1")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
 }
