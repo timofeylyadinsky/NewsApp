@@ -1,13 +1,13 @@
 package com.example.newsapp.ui
 
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import androidx.navigation.compose.rememberNavController
 import com.example.newsapp.MainActivity
-import com.example.newsapp.ui.screen.PasscodeScreen
-import com.example.newsapp.ui.theme.NewsAppTheme
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.After
@@ -39,7 +39,13 @@ class PasscodeUiTest {
 //        }
 
         composeRule.onNodeWithText("Submit").performClick()
-        composeRule.onNodeWithText("Passcode").assertIsDisplayed()
+        /*composeRule.waitUntil {
+            composeRule.onAllNodesWithText("Passcode should have 4 numbers").fetchSemanticsNodes().size == 1
+        }*/
+        composeRule.onNodeWithText("Passcode should have 4 numbers").assertIsDisplayed()
+        composeRule.onNodeWithText("Welcome to News App").assertIsDisplayed()
+        composeRule.onNodeWithText("Submit").assertIsDisplayed()
+        composeRule.onNodeWithText("Skip").assertIsDisplayed()
     }
 
     @After
