@@ -17,7 +17,7 @@ android {
         versionCode = ConfigData.versionCode
         versionName = ConfigData.versionName
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.newsapp.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
